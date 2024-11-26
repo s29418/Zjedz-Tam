@@ -34,7 +34,7 @@ exports.addTable = async (req, res) => {
     }
 };
 
-exports.updateRestaurant = async (req, res) => {
+exports.updateTable = async (req, res) => {
     try{
         const tableId = req.params.id;
         const seats = req.body;
@@ -45,7 +45,7 @@ exports.updateRestaurant = async (req, res) => {
     }
 };
 
-exports.deleteRestaurant = async (req, res) => {
+exports.deleteTable = async (req, res) => {
     try{
         const tableId = req.params.id;
         await db.query('DELETE FROM Restauranttable WHERE table_id = ?', [tableId]);

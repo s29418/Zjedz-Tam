@@ -26,8 +26,8 @@ exports.getTable = async (req, res) => {
 exports.addTable = async (req, res) => {
     try{
         const restaurantId = req.params.id;
-        const seats = req.body;
-        await db.query('INSERT INTO Restauranttable (seats) VALUES ? WHERE restauran_id = ?', [seats, restaurantId]);
+        const { seats, description } = req.body;
+        await db.query('INSERT INTO Restauranttable (seats, description, restauran_id) VALUES (?, ?, ?)', [seats, description, restaurantId]);
         res.status(201).json({ message: 'Dodano stolik' });
     } catch (error) {
         res.status(500).json({ error: 'Błąd serwera.'});
@@ -37,8 +37,8 @@ exports.addTable = async (req, res) => {
 exports.updateTable = async (req, res) => {
     try{
         const tableId = req.params.id;
-        const seats = req.body;
-        await db.query('UPDATE Restauranttable SET seats = ? WHERE table_id = ?', [seats, tableId]);
+        const { seats, description } = req.body;
+        await db.query('UPDATE Restauranttable SET seats = ?, description = ? WHERE table_id = ?', [seats, description, tableId]);
         res.status(204).json({ message: 'Zaktualizowano informacje na temat stolika' });
     } catch (error) {
         res.status(500).json({ error: 'Błąd serwera.'});

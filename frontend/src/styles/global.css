@@ -1,10 +1,228 @@
-body {
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    padding: 0;
 }
 
-h1, h2 {
-    color: #444;
+header {
+    display: flex;
+
+    background-color: #3a5721;
+    padding: 10px 20px;
+}
+
+footer {
+    background-color: #3a5721;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+main{
+    margin: 100px;
+}
+
+body {
+    font-family: Inter, sans-serif;
+    background-color: white;
+}
+
+h2 {
+    font-family: Gadugi, sans-serif;
+    font-size: 40px;
+    color: #2b4219;
+}
+
+.restaurantname {
+    text-align: center;
+    font-family: Gadugi, sans-serif;
+    font-size: 100px;
+    color: #3a5721;
+}
+
+.description {
+    margin-top: 50px;
+    word-wrap: break-word;
+    font-family: Gadugi, sans-serif;
+}
+
+.restaurantunderline {
+    margin-top: 10px;
+    border: 2px solid #3a5721;
+    border-radius: 8px;
+}
+
+.restaurantcontent {
+    margin-top: 40px;
+    display: flex;
+    column-gap: 50px;
+}
+
+.restrauntimage img{
+    width: 700px;
+    height: 525px;
+    border: 5px solid #3a5721;
+    border-radius: 10px;
+    margin-left: 70px;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    border: 5px solid #3a5721;
+    border-radius: 10px;
+    background-color: white;
+    width: 800px;
+    height: 485px;
+    padding: 20px;
+}
+
+.location img{
+    width: 800px;
+    border: 5px solid #3a5721;
+    border-radius: 10px;
+    align-self: center;
+    margin-top: 50px;
+    margin-left: 70px;
+}
+
+.logo img {
+    width: 50px;
+}
+
+nav {
+    margin-left: 10px;
+    align-self: center;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+
+
+.menu-table {
+    width: 1610px;
+    margin-top: 50px;
+    margin-left: 70px;
+}
+
+.menu-table th, .menu-table td {
+    border: 1px solid #c5c5c5;
+    padding: 8px;
+    text-align: left;
+}
+
+.menu-table th {
+    background-color: #d8d8d8;
+}
+
+
+.menu-table tr:hover {
+    background-color: #3a5721;
+    color: white;
+}
+
+.menu-table td {
+    font-family: Gadugi, sans-serif;
+    font-size: 18px;
+}
+
+.reservation-steps {
+    font-family: Gadugi, sans-serif;
+    font-size: 18px;
+    margin-top: 50px;
+    margin-left: 90px;
+}
+
+.reservation-steps li {
+    margin-bottom: 10px;
+}
+
+.reservation-steps li::marker {
+    font-weight: bold;
+}
+
+footer .logo img{
+    width: 175px;
+}
+
+@media print {
+    body, main, .menu-table td, .menu-table th, .restaurantname, .description, .reservation-steps {
+        font-family: "Times New Roman", sans-serif;
+    }
+
+    .restaurantcontent{
+        display: inline;
+    }
+
+    .menu-table{
+        width: 100%;
+        margin: 0;
+        align-self: center;
+    }
+
+    header, nav {
+        display: none;
+    }
+}
+
+.registrationForm{
+    margin-left: 8%;
+    margin-right: 60%;
+    border: 8px solid #3a5721;
+    border-radius: 55px;
+    padding: 50px 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 20px;
+    font-family: Gadugi, sans-serif;
+    margin-bottom: 10px;
+}
+
+.userInput {
+    font-size: 16px;
+    font-family: Gadugi, sans-serif;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.submitButton{
+    background-color: #3a5721;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: Gadugi, sans-serif;
+    cursor: pointer;
+}
+
+.error-message {
+    margin-top: 15px;
+    color: red;
+    font-size: 17px;
 }

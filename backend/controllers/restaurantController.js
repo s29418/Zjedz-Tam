@@ -11,7 +11,7 @@ exports.getRestaurants = async (req, res) => {
 
 exports.getRestaurant = async (req, res) => {
     try {
-        const id = req.params.id;
+        const { id } = req.params;
         const [rows] = await db.query('SELECT * FROM Restaurant WHERE restaurant_id = ?', [id]);
         if (rows.length === 0) {
             return res.status(404).json({ error: 'Restauracja nie znaleziona' });
@@ -34,7 +34,8 @@ exports.addRestaurant = async (req, res) => {
 
 exports.updateRestaurant = async (req, res) => {
     try {
-        const { id, name, address, city, phone_number, description } = req.body;
+        const id = req.params
+        const { name, address, city, phone_number, description } = req.body;
         await db.query('UPDATE Restaurant SET name = ?, address = ?, city = ?, phone_number = ?, description = ? WHERE restaurant_id = ?', [name, address, city, phone_number, description, id]);
         res.status(204).json({ message: 'Zaktualizowano dane restauracji.' });
     } catch (error) {

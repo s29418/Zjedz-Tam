@@ -1,21 +1,29 @@
-import React, { useState, useEffect } from "react";
-import RestaurantList from "../components/RestaurantList";
+import React, { useState, useEffect } from 'react';
+import RestaurantList from '../components/RestaurantList';
 
-function HomePage() {
+const HomePage = () => {
     const [restaurants, setRestaurants] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/restaurants")
-            .then((response) => response.json())
-            .then((data) => setRestaurants(data));
+        fetch("http://localhost:8000/api/restaurants")
+            .then(response => response.json())
+            .then(data => {
+                console.log("Dane restauracji:", data);
+                setRestaurants(data);
+            })
+            .catch(error => console.error("Błąd przy pobieraniu danych:", error));
     }, []);
 
     return (
-        <main>
-            <h2>Przeglądaj Restauracje</h2>
-            <RestaurantList restaurants={restaurants} />
-        </main>
+        <div>
+            <h1>Restauracje</h1>
+            {restaurants.length > 0 ? (
+                <RestaurantList restaurants={restaurants} />
+            ) : (
+                <p>Brak restauracji do wyświetlenia.</p>
+            )}
+        </div>
     );
-}
+};
 
 export default HomePage;

@@ -21,16 +21,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// <div className="logo">
-//     <a href="homepage.html">
-//         <img src="/images/logo2.png" alt="Logo Strony"/>
-//     </a>
-// </div>
-// <nav>
-//     <ul>
-//         <li><a href="../pages/HomePage.js">Home</a></li>
-//         <li><a href="search.html">Przeglądaj</a></li>
-//         <li><a href="about.html">O nas</a></li>
-//     </ul>
-// </nav>

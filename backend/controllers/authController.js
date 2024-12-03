@@ -9,10 +9,11 @@ exports.register = async (req, res) => {
         const { username, email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        await db.query('INSERT INTO User (username, email, password, role) VALUES (?, ?, ?, 1)', [username, email, hashedPassword]);
+        await db.query('INSERT INTO User (name, email, password, role) VALUES (?, ?, ?, 1)', [username, email, hashedPassword]);
         res.status(201).json({ message: 'Zarejestrowano użytkownika' });
 
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Błąd serwera' });
     }
 };
@@ -35,6 +36,7 @@ exports.login = async (req, res) => {
         res.status(200).json({ token });
 
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Błąd serwera' });
     }
 }

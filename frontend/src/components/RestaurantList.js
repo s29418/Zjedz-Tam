@@ -3,7 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 
 function RestaurantList({ restaurants }) {
     return (
-        <div className="restaurant-list">
+        <div>
             {restaurants.map((restaurant) => (
                 <RestaurantCard key={restaurant.id} restaurant={restaurant} />
             ))}

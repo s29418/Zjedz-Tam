@@ -7,21 +7,14 @@ const HomePage = () => {
     useEffect(() => {
         fetch("http://localhost:8000/api/restaurants")
             .then(response => response.json())
-            .then(data => {
-                console.log("Dane restauracji:", data);
-                setRestaurants(data);
-            })
+            .then(data => setRestaurants(data))
             .catch(error => console.error("Błąd przy pobieraniu danych:", error));
     }, []);
 
     return (
-        <div>
+        <div className="restaurantList">
             <h1>Restauracje</h1>
-            {restaurants.length > 0 ? (
-                <RestaurantList restaurants={restaurants} />
-            ) : (
-                <p>Brak restauracji do wyświetlenia.</p>
-            )}
+            <RestaurantList restaurants={restaurants} />
         </div>
     );
 };

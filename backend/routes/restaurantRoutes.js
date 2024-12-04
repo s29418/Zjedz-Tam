@@ -6,13 +6,16 @@ const {
     getRestaurant,
     addRestaurant,
     updateRestaurant,
-    deleteRestaurant
+    deleteRestaurant,
+    getAverageRating,
+    getNumberOfReviews
 } = require('../controllers/restaurantController');
 
 
 router.get('/', getRestaurants);
 router.get('/:id', getRestaurant);
-
+router.get('/:id/avRating', getAverageRating);
+router.get('/:id/numberOfReviews', getNumberOfReviews);
 
 router.post('/', verifyToken, verifyRole(3), addRestaurant);
 router.put('/:id', verifyToken, verifyRole(3), updateRestaurant);

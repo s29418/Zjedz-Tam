@@ -57,13 +57,20 @@ h2 {
     column-gap: 50px;
 }
 
+.opening-hours{
+    margin-left: 70px;
+}
+
+
 .restaurantimage img{
     width: 600px;
     height: 600px;
     border: 5px solid #3a5721;
     border-radius: 10px;
     margin-left: 70px;
+    margin-right: 50px;
 }
+
 
 .text-content {
     display: flex;
@@ -144,7 +151,7 @@ nav ul li a:hover {
 }
 
 .menu-table {
-    width: 1610px;
+    width: 100%;
     margin-top: 20px;
 }
 

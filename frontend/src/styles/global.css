@@ -57,9 +57,9 @@ h2 {
     column-gap: 50px;
 }
 
-.restrauntimage img{
-    width: 700px;
-    height: 525px;
+.restaurantimage img{
+    width: 600px;
+    height: 600px;
     border: 5px solid #3a5721;
     border-radius: 10px;
     margin-left: 70px;
@@ -72,7 +72,7 @@ h2 {
     border-radius: 10px;
     background-color: white;
     width: 800px;
-    height: 485px;
+    height: 560px;
     padding: 20px;
 }
 
@@ -114,12 +114,38 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
+.menu-section {
+    margin-top: 50px;
+    margin-left: 70px;
+}
 
+.categories {
+    /*margin-right: 10px;*/
+    margin-top: 10px;
+    font-family: Gadugi, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #2b4219;
+}
+
+.category {
+    margin-left: 10px;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #2b4219;
+    border-radius: 25%;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.category:checked {
+    background-color: #3a5721;
+}
 
 .menu-table {
     width: 1610px;
-    margin-top: 50px;
-    margin-left: 70px;
+    margin-top: 20px;
 }
 
 .menu-table th, .menu-table td {
@@ -143,25 +169,9 @@ nav ul li a:hover {
     font-size: 18px;
 }
 
-.reservation-steps {
-    font-family: Gadugi, sans-serif;
-    font-size: 18px;
-    margin-top: 50px;
-    margin-left: 90px;
-}
-
-.reservation-steps li {
-    margin-bottom: 10px;
-}
-
-.reservation-steps li::marker {
-    font-weight: bold;
-}
-
 footer .logo img{
     width: 175px;
 }
-
 
 .registrationForm{
     margin-left: 8%;
@@ -249,11 +259,6 @@ form {
     height: 390px;
     object-fit: cover;
     border-radius: 8px;
-}
-
-.restaurant-card-link {
-    text-decoration: none;
-    color: inherit;
 }
 
 .rating{

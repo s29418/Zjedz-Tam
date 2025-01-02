@@ -9,7 +9,7 @@ function RestaurantCard({ restaurant }) {
 
         const fetchAverageRating = async () => {
             try {
-                const response = await fetch(`/api/restaurants/${restaurant.restaurant_id}/averageRating`);
+                const response = await fetch(`/api/restaurants/${restaurant.restaurant_id}/avRating`);
                 const data = await response.json();
                 setAverageRating(data.averageRating || 0);
             } catch (error) {
@@ -33,7 +33,7 @@ function RestaurantCard({ restaurant }) {
     }, [restaurant.restaurant_id]);
 
     return (
-        <Link to={`/restaurants/${restaurant.restaurant_id}`} className="restaurant-card-link">
+        <Link to={`/restaurants/${restaurant.restaurant_id}`}>
             <div className="restaurant-card">
                 <h3 className="restaurantSearchName">{restaurant.name}</h3>
                 <img className="restaurantSearchImage"
@@ -43,7 +43,7 @@ function RestaurantCard({ restaurant }) {
 
                 <div className="rating">
                     <img src="/images/gwiazdka.png" alt="Ocena"/>
-                    <p>{averageRating} ({numberOfReviews})</p>
+                    <p className="shortDescription">{averageRating} ({numberOfReviews})</p>
                 </div>
                 <p className="shortDescription">{restaurant.short_description}</p>
             </div>

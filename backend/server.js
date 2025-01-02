@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const restaurantRoutes = require('./routes/restaurantRoutes');
 const authRoutes = require('./routes/authRoutes');
+const menuRoutes = require('./routes/menuRoutes');
 const path = require('path');
 const cors = require('cors');
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/restaurants', restaurantRoutes);
+app.use('/api/menus', menuRoutes);
 
 
 app.listen(PORT, () => {

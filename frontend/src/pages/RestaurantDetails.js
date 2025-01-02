@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Menu from "../components/Menu";
 
 function RestaurantDetails() {
     const { id } = useParams();
@@ -16,11 +17,29 @@ function RestaurantDetails() {
 
     return (
         <div>
-            <h2>{restaurant.name}</h2>
-            {/*<img src={`/images/${restaurant.image}`} alt={restaurant.name} />*/}
-            <p>{restaurant.description}</p>
+            <div className="restaurantcontent">
+
+                <div className="restaurantimage">
+                    <img
+                         src={restaurant.image ? `/images/${restaurant.image}` : `/images/no-image.jpg`}
+                         alt={restaurant.name}
+                    />
+                </div>
+
+                <div className="text-content">
+
+                    <h1 class="restaurantname">{restaurant.name}</h1>
+                    <hr className="restaurantunderline"/>
+                    <p className="description">{restaurant.description}</p>
+
+                </div>
+
+            </div>
+
+            <Menu restaurantId={id} />
         </div>
     );
+
 }
 
 export default RestaurantDetails;

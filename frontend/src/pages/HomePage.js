@@ -13,8 +13,9 @@ const HomePage = () => {
 
     return (
         <div className="restaurantList">
-            <h1>Restauracje</h1>
-            <RestaurantList restaurants={restaurants} />
+            <h2>Restauracje</h2>
+            <hr className="restaurantunderline"/>
+            <RestaurantList restaurants={restaurants}/>
         </div>
     );
 };

@@ -71,6 +71,12 @@ h2 {
     margin-right: 50px;
 }
 
+.form-container {
+    display: flex;
+    /*justify-content: space-between;*/
+    /*padding: 20px;*/
+}
+
 
 .text-content {
     display: flex;
@@ -181,8 +187,9 @@ footer .logo img{
 }
 
 .registrationForm{
-    margin-left: 8%;
-    margin-right: 60%;
+    width: 1500%;
+    /*margin-left: 8%;*/
+    margin-right: 5%;
     border: 8px solid #3a5721;
     border-radius: 55px;
     padding: 50px 30px;

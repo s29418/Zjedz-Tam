@@ -15,6 +15,8 @@ function RestaurantDetails() {
 
     if (!restaurant) return <p>Loading...</p>;
 
+    const weekDaysOrder = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
+
     return (
         <div>
             <div className="restaurantcontent">

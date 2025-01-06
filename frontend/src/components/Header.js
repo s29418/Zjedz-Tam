@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
-import { useUser } from '../context/UserContext';
+import {UserContext} from '../context/UserContext';
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
 
-    const { user } = useUser();
+    const { user, logout } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
 
     return (
         <header>
@@ -18,11 +25,25 @@ const Header = () => {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/search">Przeglądaj</Link></li>
                     <li><Link to="/about">O nas</Link></li>
+                </ul>
+            </nav>
+
+            <nav className="profile-nav">
+                <ul>
+
                     {user ? (
-                        <li><Link to="/profile">Profil</Link></li>
+                        <>
+                            <li><Link to="/profile">Profil</Link></li>
+                            <li>
+                                <button onClick={handleLogout} className="logout-button">
+                                    Wyloguj się
+                                </button>
+                            </li>
+                        </>
                     ) : (
                         <li><Link to="/login">Logowanie</Link></li>
                     )}
+
                 </ul>
             </nav>
         </header>

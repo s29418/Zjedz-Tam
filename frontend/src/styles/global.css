@@ -5,7 +5,8 @@
 
 header {
     display: flex;
-
+    justify-content: space-between;
+    align-items: center;
     background-color: #3a5721;
     padding: 10px 20px;
 }
@@ -105,12 +106,15 @@ h2 {
 nav {
     margin-left: 10px;
     align-self: center;
+    align-items: center;
+    flex-grow: 1;
 }
 
 nav ul {
     list-style-type: none;
     display: flex;
-
+    margin: 0;
+    padding: 0;
 }
 
 nav ul li {
@@ -286,4 +290,24 @@ form {
 .rating img{
     width: 40px;
     height: auto;
+}
+
+.logout-button {
+    font-family: Gadugi, sans-serif;
+    font-size: 12px;
+    background-color: #2b4219;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.logout-button:hover {
+    background-color: #446e3d;
+}
+
+.profile-nav{
+    display: flex;
+    justify-content: flex-end;
 }

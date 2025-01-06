@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import RestaurantDetails from "./pages/RestaurantDetails";
 import Registration from "./pages/Registration";
 import {UserProvider} from "./context/UserContext";
+import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                         <Route path="/" element={<HomePage />} />
                         <Route path="/restaurants/:id" element={<RestaurantDetails />} />
                         <Route path="/login" element={<Registration />} />
+                        <Route path="/profile" element={<ProfilePage />} />
                         {/*<Route path="/search" element={<SearchPage />} />*/}
                         {/*<Route path="/about" element={<AboutPage />} />*/}
                     </Routes>

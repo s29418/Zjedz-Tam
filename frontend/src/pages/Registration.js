@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useUser } from '../context/UserContext';
+import { UserContext } from '../context/UserContext';
 
 function Registration() {
     const [loginEmail, setLoginEmail] = useState('');
@@ -16,7 +16,7 @@ function Registration() {
 
     const navigate = useNavigate();
 
-    const { setUser } = useUser();
+    const { login } = useContext(UserContext);
 
 
     const validateLogin = () => {
@@ -68,10 +68,11 @@ function Registration() {
                 if (response.ok) {
                     console.log("Zalogowano pomyślnie:", data);
                     localStorage.setItem("token", data.token);
-                    setUser({ loginEmail });
+                    login({ email: loginEmail });
                     navigate("/");
                 } else {
                     console.error("Błąd logowania:", data.error);
+                    setLoginError("Niepoprawne dane logowania.")
                 }
             } catch (error) {
                 console.error("Błąd podczas logowania:", error);
@@ -145,7 +146,7 @@ function Registration() {
                         <br/>
 
                         <button class="submitButton" type="submit">Zaloguj się</button>
-                        {loginError && <span className="error-message">{loginError}</span>}
+                        <span className="error-message">{loginError}</span>
 
                     </form>
                 </div>
@@ -201,7 +202,7 @@ function Registration() {
                         <br/>
 
                         <button class="submitButton" type="submit">Zarejestruj się</button>
-                        {registerError && <span className="error-message">{registerError}</span>}
+                        <span className="error-message">{registerError}</span>
 
                     </form>
                 </div>

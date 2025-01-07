@@ -37,7 +37,7 @@ function RestaurantCard({ restaurant }) {
             <div className="restaurant-card">
                 <h3 className="restaurantSearchName">{restaurant.name}</h3>
                 <img className="restaurantSearchImage"
-                     src={restaurant.image ? `/images/${restaurant.image}` : `/images/no-image.jpg`}
+                     src={restaurant.image ? `${restaurant.image}` : `/images/no-image.jpg`}
                      alt={restaurant.name}
                 />
 

@@ -30,7 +30,7 @@ function RestaurantDetails() {
 
                     <div className="restaurantimage">
                         <img
-                            src={restaurant.image ? `/images/${restaurant.image}` : `/images/no-image.jpg`}
+                            src={restaurant.image ? `${restaurant.image}` : `/images/no-image.jpg`}
                             alt={restaurant.name}
                         />
                     </div>

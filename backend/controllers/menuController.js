@@ -51,10 +51,10 @@ exports.getMenuCategories = async (req, res) => {
 
 exports.getItemsByCategory = async (req, res) => {
     try {
-        const categoryId = req.params.id;
+        const menucategoryId = req.params.id;
         const [rows] = await db.query(
-            'SELECT * FROM MenuItem WHERE category_id = ?',
-            [categoryId]
+            'SELECT * FROM MenuItem WHERE menucategory_id = ?',
+            [menucategoryId]
         );
         res.status(200).json(rows);
     } catch (error) {

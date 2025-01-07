@@ -1,14 +1,5 @@
 const db = require('../models/db');
 
-exports.getUsers = async (req, res) => {
-    try{
-        const [rows] = await db.query('SELECT * FROM User');
-        res.status(200).json(rows);
-    } catch (error) {
-        res.status(500).json({ error: 'Błąd serwera' });
-    }
-}
-
 exports.getUser = async (req, res) => {
     try {
         const id = req.params.id;
@@ -22,3 +13,11 @@ exports.getUser = async (req, res) => {
     }
 }
 
+// exports.getUsersReservations = async (req, res) => {
+//     try{
+//         const id = req.params.id;
+//         const
+//     } catch (error) {
+//         res.status(500).json({error: 'Błąd serwera'});
+//     }
+// }

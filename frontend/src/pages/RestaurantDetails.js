@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
 
 function RestaurantDetails() {
     const { id } = useParams();
     const [restaurant, setRestaurant] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`http://localhost:8000/api/restaurants/${id}`)
@@ -16,6 +17,10 @@ function RestaurantDetails() {
     if (!restaurant) return <p>Loading...</p>;
 
     const weekDaysOrder = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
+
+    const handleReservationClick = () => {
+        navigate(`/reservation/${id}`);
+    };
 
     return (
         <div>
@@ -31,6 +36,9 @@ function RestaurantDetails() {
                     </div>
 
                     <div className="opening-hours">
+
+                        <button className="reservationButton" onClick={handleReservationClick}>Zarezerwuj stolik</button>
+
                         <h2>Godziny otwarcia:</h2>
 
                         {restaurant.opening_hours ? (
@@ -58,6 +66,7 @@ function RestaurantDetails() {
                     </div>
                 </div>
 
+
                 <div className="text-content">
 
                     <h1 className="restaurantname">{restaurant.name}</h1>
@@ -65,10 +74,10 @@ function RestaurantDetails() {
                     <p className="description">{restaurant.description}</p>
 
                 </div>
-
             </div>
 
-            <Menu restaurantId={id} />
+            <Menu restaurantId={id}/>
+
         </div>
     );
 

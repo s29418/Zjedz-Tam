@@ -311,3 +311,17 @@ form {
     display: flex;
     justify-content: flex-end;
 }
+
+.reservationButton{
+    background-color: #3a5721;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    padding: 10px;
+    font-size: 26px;
+    font-family: Gadugi, sans-serif;
+    cursor: pointer;
+    margin-left: 200px;
+}

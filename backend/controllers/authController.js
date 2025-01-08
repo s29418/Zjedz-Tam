@@ -9,7 +9,7 @@ exports.register = async (req, res) => {
         const { username, email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        await db.query('INSERT INTO User (name, email, password, role) VALUES (?, ?, ?, 1)', [username, email, hashedPassword]);
+        await db.query('INSERT INTO User (name, email, password, userroles_id) VALUES (?, ?, ?, 1)', [username, email, hashedPassword]);
         res.status(201).json({ message: 'Zarejestrowano użytkownika' });
 
     } catch (error) {
@@ -32,11 +32,16 @@ exports.login = async (req, res) => {
             return res.status(401).json({ error: 'Niepoprawne hasło' });
         }
 
-        const token = jwt.sign({ id: user.user_id, role: user.role }, SECRET_KEY, { expiresIn: '1h' });
-        res.status(200).json({ token });
+        const token = jwt.sign({ id: user.user_id, role: user.UserRoles_id }, SECRET_KEY, { expiresIn: '1h' });
+        res.status(200).json({ token: token, role: user.UserRoles_id });
 
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Błąd serwera' });
     }
 }
+
+exports.getUserProfile = (req, res) => {
+    const { id, role } = req.user;
+    res.status(200).json({ id, role });
+};

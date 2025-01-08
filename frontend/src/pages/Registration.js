@@ -48,8 +48,8 @@ function Registration() {
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
-        if (validateLogin()) {
 
+        if (validateLogin()) {
             const loginData = {
                 email: loginEmail,
                 password: loginPassword,
@@ -65,20 +65,25 @@ function Registration() {
                 });
 
                 const data = await response.json();
+
                 if (response.ok) {
-                    console.log("Zalogowano pomyślnie:", data);
                     localStorage.setItem("token", data.token);
-                    login({ email: loginEmail });
+                    localStorage.setItem("role", data.role);
+
+                    login({ email: loginEmail, role: data.role });
                     navigate("/");
                 } else {
-                    console.error("Błąd logowania:", data.error);
-                    setLoginError("Niepoprawne dane logowania.")
+                    const errorMessage = data?.error || "Niepoprawne dane logowania.";
+                    console.error("Błąd logowania:", errorMessage);
+                    setLoginError(errorMessage);
                 }
             } catch (error) {
                 console.error("Błąd podczas logowania:", error);
+                setLoginError("Nie udało się połączyć z serwerem.");
             }
         }
-    }
+    };
+
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();

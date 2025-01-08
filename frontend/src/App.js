@@ -7,6 +7,7 @@ import RestaurantDetails from "./pages/RestaurantDetails";
 import Registration from "./pages/Registration";
 import {UserProvider} from "./context/UserContext";
 import ProfilePage from "./pages/ProfilePage";
+import AddRestaurant from "./pages/AddRestaurant";
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                         <Route path="/restaurants/:id" element={<RestaurantDetails />} />
                         <Route path="/login" element={<Registration />} />
                         <Route path="/profile" element={<ProfilePage />} />
+                        <Route path="/addRestaurant" element={<AddRestaurant />} />
                         {/*<Route path="/search" element={<SearchPage />} />*/}
                         {/*<Route path="/about" element={<AboutPage />} />*/}
                     </Routes>

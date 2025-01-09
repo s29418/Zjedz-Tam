@@ -24,3 +24,32 @@ exports.verifyRole = (role) => (req, res, next) => {
     }
     next();
 }
+
+
+exports.verifyAdminOrRestaurantAdmin = (req, res, next) => {
+    const user = req.user;
+
+    if (!user) {
+        return res.status(403).json({ error: 'Brak dostępu' });
+    }
+
+    if (user.role === 2) {
+        return next();
+    }
+
+    const restaurantId = req.params.id || req.body.restaurant_id;
+    if (!restaurantId) {
+        return res.status(400).json({ error: 'Brak ID restauracji' });
+    }
+
+    const isRestaurantAdmin = user.restaurantRoles.some(role =>
+        role.restaurant_id === parseInt(restaurantId) &&
+        role.RestaurantUserRoles_id === 2
+    );
+
+    if (isRestaurantAdmin) {
+        return next();
+    }
+
+    return res.status(403).json({ error: 'Brak odpowiednich uprawnień' });
+};

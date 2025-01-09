@@ -1,56 +1,89 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-function AddRestaurant() {
-
+function EditRestaurant() {
     const [name, setName] = useState('');
     const [city, setCity] = useState('');
     const [address, setAddress] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [phone_number, setPhone_number] = useState('');
     const [description, setDescription] = useState('');
     const [shortDescription, setShortDescription] = useState('');
     const [photo, setPhoto] = useState('');
-    const [addError, setAddError] = useState('');
+    const [editError, setEditError] = useState('');
 
     const navigate = useNavigate();
+    const { id } = useParams();
+
+    useEffect(() => {
+        const fetchRestaurant = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const response = await fetch(`http://localhost:8000/api/restaurants/${id}`, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setName(data.name);
+                    setCity(data.city);
+                    setAddress(data.address);
+                    setPhone_number(data.phone_number || '');
+                    setDescription(data.description || '');
+                    setShortDescription(data.short_description || '');
+                    setPhoto(data.image || '');
+                } else {
+                    setEditError("Nie udało się pobrać danych restauracji.");
+                }
+            } catch (error) {
+                console.error("Błąd podczas pobierania danych:", error);
+                setEditError("Nie udało się połączyć z serwerem.");
+            }
+        };
+
+        fetchRestaurant();
+    }, [id]);
 
     const validateForm = () => {
         if (name.length < 3) {
-            setAddError("Nazwa restauracji musi mieć co najmniej 3 znaki.");
+            setEditError("Nazwa restauracji musi mieć co najmniej 3 znaki.");
             return false;
         }
 
         if (city.length < 3) {
-            setAddError("Nazwa miasta musi mieć co najmniej 3 znaki.");
+            setEditError("Nazwa miasta musi mieć co najmniej 3 znaki.");
             return false;
         }
 
         if (address.length < 3) {
-            setAddError("Adres restauracji musi mieć co najmniej 3 znaki.");
+            setEditError("Adres restauracji musi mieć co najmniej 3 znaki.");
             return false;
         }
 
         return true;
-    }
+    };
 
-    const addRestaurant = async (e) => {
+    const updateRestaurant = async (e) => {
         e.preventDefault();
 
         const restaurantData = {
-            name: name,
-            city: city,
-            address: address,
-            phoneNumber: phoneNumber,
-            description: description,
-            shortDescription: shortDescription,
-            photo: photo,
-        }
+            name,
+            city,
+            address,
+            phone_number,
+            description,
+            shortDescription,
+            photo,
+            id,
+        };
 
         if (validateForm()) {
             try {
                 const token = localStorage.getItem("token");
-                const response = await fetch("http://localhost:8000/api/restaurants/", {
-                    method: "POST",
+                const response = await fetch(`http://localhost:8000/api/restaurants/${id}`, {
+                    method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`,
@@ -60,27 +93,26 @@ function AddRestaurant() {
 
                 const data = await response.json();
                 if (response.ok) {
-                    console.log("Dodano restauracje.", data.message);
+                    console.log("Zaktualizowano restaurację.", data.message);
                     navigate("/");
                 } else {
-                    setAddError(data.error || "Wystąpił błąd podczas dodawania restauracji.");
-                    console.error("Błąd podczas dodawania restauracji", data.error);
+                    setEditError(data.error || "Wystąpił błąd podczas aktualizacji restauracji.");
+                    console.error("Błąd podczas aktualizacji restauracji", data.error);
                 }
             } catch (error) {
                 console.error("Błąd :", error);
-                setAddError("Nie udało się połączyć z serwerem.");
+                setEditError("Nie udało się połączyć z serwerem.");
             }
         }
-    }
+    };
 
     return (
         <div>
-            <h2 className="addrestaurant">Dodaj restauracje</h2>
+            <h2 className="addrestaurant">Edytuj restaurację</h2>
 
             <div className="form-container-short">
-
                 <div className="registrationForm">
-                    <form onSubmit={addRestaurant}>
+                    <form onSubmit={updateRestaurant}>
                         <label htmlFor="name">Nazwa restauracji:</label>
                         <input
                             type="text"
@@ -88,9 +120,9 @@ function AddRestaurant() {
                             className="userInput"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            required/>
+                            required
+                        />
                         <br/>
-
 
                         <label className="label" htmlFor="city">Miasto:</label>
                         <input
@@ -118,8 +150,8 @@ function AddRestaurant() {
                             type="text"
                             id="phoneNumber"
                             className="userInput"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            value={phone_number}
+                            onChange={(e) => setPhone_number(e.target.value)}
                         />
                         <br/>
 
@@ -153,15 +185,13 @@ function AddRestaurant() {
                         />
                         <br/>
 
-                        <button className="submitButton" type="submit">Dodaj restaurację</button>
-                        <span className="error-message">{addError}</span>
-
+                        <button className="submitButton" type="submit">Zapisz zmiany</button>
+                        <span className="error-message">{editError}</span>
                     </form>
-
                 </div>
             </div>
         </div>
     );
 }
 
-export default AddRestaurant;
+export default EditRestaurant;

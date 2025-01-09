@@ -6,9 +6,11 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
 
-    const login = (userData) => {
+    const login = (userData, token) => {
         setUser(userData);
         setIsAdmin(userData.role === 2);
+        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("token", token);
     };
 
     const logout = () => {

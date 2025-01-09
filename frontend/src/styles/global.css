@@ -48,11 +48,30 @@ h2 {
 
 .restaurantunderline {
     margin-top: 10px;
+    margin-bottom: 50px;
+    border: 2px solid #3a5721;
+    border-radius: 8px;
+}
+
+.restaurantunderline2 {
+    align-self: center;
+    width: 60%;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    border: 1px solid #3a5721;
+    border-radius: 8px;
+}
+
+.restaurantunderline3 {
+    margin-top: 10px;
+    margin-bottom: 50px;
+    margin-right: 140px;
     border: 2px solid #3a5721;
     border-radius: 8px;
 }
 
 .restaurantcontent {
+    margin-right: 150px;
     margin-top: 40px;
     display: flex;
     column-gap: 50px;
@@ -66,6 +85,7 @@ h2 {
 .restaurantimage img{
     width: 600px;
     height: 600px;
+    object-fit: cover;
     border: 5px solid #3a5721;
     border-radius: 10px;
     margin-left: 70px;
@@ -268,6 +288,11 @@ form {
     border-radius: 10px;
 }
 
+.restaurant-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .restaurant-card:hover {
     box-shadow: 0 8px 16px #00000070;
 }
@@ -331,9 +356,41 @@ form {
     color: white;
     border: none;
     border-radius: 5px;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     padding: 10px;
     font-size: 26px;
     font-family: Gadugi, sans-serif;
     cursor: pointer;
+}
+
+.adminButton2{
+    background-color: #3a5721;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    margin-top: 5px;
+    padding: 10px;
+    font-size: 20px;
+    width: 100%;
+    font-family: Gadugi, sans-serif;
+    cursor: pointer;
+}
+
+.addrestaurant{
+    margin-bottom: 50px;
+}
+
+.form-container-short{
+    display: flex;
+    margin-right: 40%;
+}
+
+.address{
+    font-family: Gadugi, sans-serif;
+    font-style: italic;
+    font-size: 25px;
+    color: #2b4219;
+    word-wrap: break-word;
+    text-align: center;
+    margin-bottom: 25px;
 }

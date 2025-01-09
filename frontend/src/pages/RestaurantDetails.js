@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
+import { jwtDecode } from "jwt-decode";
 
 function RestaurantDetails() {
     const { id } = useParams();
@@ -16,6 +17,17 @@ function RestaurantDetails() {
 
     if (!restaurant) return <p>Loading...</p>;
 
+    const isAdminForRestaurant = (restaurantId) => {
+        const token = localStorage.getItem("token");
+        if (!token) return false;
+
+        const decoded = jwtDecode(token);
+
+        return decoded.restaurantRoles.some(
+            (role) => String(role.restaurant_id) === String(restaurantId) && role.RestaurantUserRoles_id === 2
+        );
+    };
+
     const weekDaysOrder = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
 
     const handleReservationClick = () => {
@@ -24,6 +36,12 @@ function RestaurantDetails() {
 
     return (
         <div>
+            {isAdminForRestaurant(id) ? (
+                <div>
+                    <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/edit`)}>Edytuj</button>
+                </div>
+            ) : null}
+
             <div className="restaurantcontent">
 
                 <div className="left-panel">
@@ -71,7 +89,14 @@ function RestaurantDetails() {
 
                     <h1 className="restaurantname">{restaurant.name}</h1>
                     <hr className="restaurantunderline"/>
-                    <p className="description">{restaurant.description}</p>
+                    <p className="address">{restaurant.address}, {restaurant.city}</p>
+
+                    {restaurant.phone_number ? (
+                        <p className="shortDescription">Telefon: {restaurant.phone_number}</p>
+                    ) : null}
+
+                    <hr className="restaurantunderline2"/>
+                    <p className="shortDescription">{restaurant.description}</p>
 
                 </div>
             </div>

@@ -32,7 +32,24 @@ exports.login = async (req, res) => {
             return res.status(401).json({ error: 'Niepoprawne hasło' });
         }
 
-        const token = jwt.sign({ id: user.user_id, role: user.UserRoles_id }, SECRET_KEY, { expiresIn: '1h' });
+        const [restaurantRolesRows] = await db.query(
+            `SELECT restaurant_id, RestaurantUserRoles_id
+             FROM RestaurantUser
+             WHERE user_id = ?`, [user.user_id]
+        );
+
+        const restaurantRoles = restaurantRolesRows.map(row => ({
+            restaurant_id: row.restaurant_id,
+            RestaurantUserRoles_id: row.RestaurantUserRoles_id,
+        }));
+
+        const token = jwt.sign({
+            id: user.user_id,
+            role: user.UserRoles_id,
+            restaurantRoles,
+        }, SECRET_KEY, { expiresIn: '1h' });
+
+        // const token = jwt.sign({ id: user.user_id, role: user.UserRoles_id }, SECRET_KEY, { expiresIn: '1h' });
         res.status(200).json({ token: token, role: user.UserRoles_id });
 
     } catch (error) {
@@ -40,6 +57,20 @@ exports.login = async (req, res) => {
         res.status(500).json({ error: 'Błąd serwera' });
     }
 }
+
+exports.verify = (req, res) => {
+    const token = req.headers['authorization']?.split(' ')[2];
+    if (!token) {
+        return res.status(401).json({ error: 'Brak tokena' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        res.status(200).json({ user: decoded });
+    } catch (err) {
+        res.status(403).json({ error: 'Nieprawidłowy lub wygasły token' });
+    }
+};
 
 exports.getUserProfile = (req, res) => {
     const { id, role } = req.user;

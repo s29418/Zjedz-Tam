@@ -15,9 +15,9 @@ function RestaurantList({ restaurants }) {
         <div>
 
             {isAdmin && (
-                <div>
+
                     <button className="adminButton" onClick={addRestaurant}>Dodaj Restaurację</button>
-                </div>
+
             )}
 
 

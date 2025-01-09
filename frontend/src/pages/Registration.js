@@ -67,10 +67,7 @@ function Registration() {
                 const data = await response.json();
 
                 if (response.ok) {
-                    localStorage.setItem("token", data.token);
-                    localStorage.setItem("role", data.role);
-
-                    login({ email: loginEmail, role: data.role });
+                    login({ email: loginEmail, role: data.role }, data.token);
                     navigate("/");
                 } else {
                     const errorMessage = data?.error || "Niepoprawne dane logowania.";

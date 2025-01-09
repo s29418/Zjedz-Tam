@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { verifyToken, verifyRole } = require('../middlewares/authMiddleware');
+const { verifyToken, verifyRole, verifyAdminOrRestaurantAdmin} = require('../middlewares/authMiddleware');
 const {
     getRestaurants,
     getRestaurant,
@@ -17,9 +17,9 @@ router.get('/:id', getRestaurant);
 router.get('/:id/avRating', getAverageRating);
 router.get('/:id/numberOfReviews', getNumberOfReviews);
 
-router.post('/', verifyToken, verifyRole(3), addRestaurant);
-router.put('/:id', verifyToken, verifyRole(3), updateRestaurant);
-router.delete('/:id', verifyToken, verifyRole(3), deleteRestaurant);
+router.post('/', verifyToken, verifyRole(2), addRestaurant);
+router.put('/:id', verifyToken, verifyAdminOrRestaurantAdmin, updateRestaurant);
+router.delete('/:id', verifyToken, verifyAdminOrRestaurantAdmin, deleteRestaurant);
 
 
 module.exports = router;

@@ -14,7 +14,7 @@ const HomePage = () => {
     return (
         <div className="restaurantList">
             <h2>Restauracje</h2>
-            <hr className="restaurantunderline"/>
+            <hr className="restaurantunderline3"/>
             <RestaurantList restaurants={restaurants}/>
         </div>
     );

@@ -8,12 +8,20 @@ const {
     updateRestaurant,
     deleteRestaurant,
     getAverageRating,
-    getNumberOfReviews
+    getNumberOfReviews,
+    getAccessForRestaurant,
+    revokeAccess,
+    grantAccess
 } = require('../controllers/restaurantController');
 
 
 router.get('/', getRestaurants);
 router.get('/:id', getRestaurant);
+
+router.get('/:id/access', getAccessForRestaurant, verifyAdminOrRestaurantAdmin, revokeAccess);
+router.delete('/:id/access', verifyToken, verifyAdminOrRestaurantAdmin, revokeAccess);
+router.post('/:id/access', verifyToken, verifyAdminOrRestaurantAdmin, grantAccess);
+
 router.get('/:id/avRating', getAverageRating);
 router.get('/:id/numberOfReviews', getNumberOfReviews);
 

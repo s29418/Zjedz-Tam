@@ -9,6 +9,8 @@ import {UserProvider} from "./context/UserContext";
 import ProfilePage from "./pages/ProfilePage";
 import AddRestaurant from "./pages/AddRestaurant";
 import EditRestaurant from "./pages/EditRestaurant";
+import RestaurantAccessManager from "./pages/RestaurantAccessManager";
+import RestaurantAccessManagerGrant from "./pages/RestaurantAccessManagerGrant";
 
 const App = () => {
     return (
@@ -20,8 +22,11 @@ const App = () => {
                         <Route path="/" element={<HomePage />} />
 
                         <Route path="/restaurants/:id" element={<RestaurantDetails />} />
-                        <Route path="/restaurants/:id/edit" element={<EditRestaurant />} />
                         <Route path="/addRestaurant" element={<AddRestaurant />} />
+                        <Route path="/restaurants/:id/edit" element={<EditRestaurant />} />
+                        <Route path="/restaurants/:id/access" element={<RestaurantAccessManager />} />
+                        <Route path="/restaurants/:id/grantAccess" element={<RestaurantAccessManagerGrant />} />
+
 
                         <Route path="/login" element={<Registration />} />
                         <Route path="/profile" element={<ProfilePage />} />

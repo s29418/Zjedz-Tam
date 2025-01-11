@@ -44,6 +44,10 @@ function RestaurantCard({ restaurant }) {
                             onClick={() => navigate(`/restaurants/${restaurant.restaurant_id}/edit`)}>Edytuj
                     </button>
                     <br/>
+                    <button className="adminButton2"
+                            onClick={() => navigate(`/restaurants/${restaurant.restaurant_id}/access`)}>Zarządzaj dostępem
+                    </button>
+                    <br/>
                     <button className="adminButton2" onClick={() => handleDelete()}>Usuń</button>
                 </div>
             )}

@@ -356,7 +356,7 @@ form {
     color: white;
     border: none;
     border-radius: 5px;
-    /*margin-top: 50px;*/
+    margin-right: 20px;
     padding: 10px;
     font-size: 26px;
     font-family: Gadugi, sans-serif;
@@ -393,4 +393,8 @@ form {
     word-wrap: break-word;
     text-align: center;
     margin-bottom: 25px;
+}
+
+.adminPannel{
+    margin-left: 70px;
 }

@@ -11,6 +11,7 @@ import AddRestaurant from "./pages/AddRestaurant";
 import EditRestaurant from "./pages/EditRestaurant";
 import RestaurantAccessManager from "./pages/RestaurantAccessManager";
 import RestaurantAccessManagerGrant from "./pages/RestaurantAccessManagerGrant";
+import OpeningHoursEditor from "./pages/OpeningHoursEditor";
 
 const App = () => {
     return (
@@ -26,6 +27,7 @@ const App = () => {
                         <Route path="/restaurants/:id/edit" element={<EditRestaurant />} />
                         <Route path="/restaurants/:id/access" element={<RestaurantAccessManager />} />
                         <Route path="/restaurants/:id/grantAccess" element={<RestaurantAccessManagerGrant />} />
+                        <Route path="/restaurants/:id/opening-hours" element={<OpeningHoursEditor />} />
 
 
                         <Route path="/login" element={<Registration />} />

@@ -121,6 +121,33 @@ exports.revokeAccess = async (req, res) => {
     }
 };
 
+exports.updateOpeningHours = async (req, res) => {
+    const { restaurantId } = req.params;
+    const { opening_hours } = req.body;
+
+    const validDays = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
+
+    console.log("Otrzymane dane:", opening_hours);
+    const isValid = validDays.every(day => opening_hours.hasOwnProperty(day)) &&
+        Object.keys(opening_hours).length === validDays.length;
+
+    if (!isValid) {
+        return res.status(400).json({ error: "Nieprawidłowy format godzin otwarcia." });
+    }
+    try {
+        await db.query('UPDATE Restaurant SET opening_hours = ? WHERE restaurant_id = ?', [
+            JSON.stringify(opening_hours),
+            restaurantId
+        ]);
+
+        res.status(200).json({ message: "Godziny otwarcia zaktualizowane." });
+    } catch (error) {
+        console.error("Błąd aktualizacji godzin otwarcia:", error);
+        res.status(500).json({ error: "Błąd serwera." });
+    }
+};
+
+
 
 exports.getAverageRating = async (req, res) => {
     try {

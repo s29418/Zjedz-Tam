@@ -11,7 +11,8 @@ const {
     getNumberOfReviews,
     getAccessForRestaurant,
     revokeAccess,
-    grantAccess
+    grantAccess,
+    updateOpeningHours
 } = require('../controllers/restaurantController');
 
 
@@ -28,6 +29,8 @@ router.get('/:id/numberOfReviews', getNumberOfReviews);
 router.post('/', verifyToken, verifyRole(2), addRestaurant);
 router.put('/:id', verifyToken, verifyAdminOrRestaurantAdmin, updateRestaurant);
 router.delete('/:id', verifyToken, verifyAdminOrRestaurantAdmin, deleteRestaurant);
+
+router.put('/:id/opening-hours', updateOpeningHours);
 
 
 module.exports = router;

@@ -28,6 +28,20 @@ function RestaurantDetails() {
         );
     };
 
+    const handleDelete = async () => {
+        const response = await fetch(`http://localhost:8000/api/restaurants/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if (response.ok) {
+            navigate('/');
+            window.location.reload();
+        }
+    }
+
     const weekDaysOrder = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
 
     const handleReservationClick = () => {
@@ -37,8 +51,10 @@ function RestaurantDetails() {
     return (
         <div>
             {isAdminForRestaurant(id) ? (
-                <div>
-                    <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/edit`)}>Edytuj</button>
+                <div className="adminPannel">
+                    <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/edit`)}>Edytuj restauracje</button>
+                    <button className="adminButton" onClick={() => handleDelete()}>Usuń restauracje</button>
+                    <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/access`)}>Zarządzaj dostępem</button>
                 </div>
             ) : null}
 
@@ -55,32 +71,41 @@ function RestaurantDetails() {
 
                     <div className="opening-hours">
 
-                        <button className="reservationButton" onClick={handleReservationClick}>Zarezerwuj stolik</button>
+                        <button className="reservationButton" onClick={handleReservationClick}>Zarezerwuj stolik
+                        </button>
 
                         <h2>Godziny otwarcia:</h2>
 
-                        {restaurant.opening_hours ? (
-                            <table className="menu-table">
-                                <tbody>
-                                <tr>
-                                    <th>Dzień</th>
-                                    <th>Godziny</th>
-                                </tr>
-                                </tbody>
+                        {isAdminForRestaurant(id) ? (
+                            <div>
+                                <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/opening-hours`)}>Edytuj godziny otwarcia</button>
+                            </div>
+                        ) : null}
 
-                                {Object.entries(restaurant.opening_hours).map(([day, hours]) => (
+                        <table className="menu-table">
+
+                            <thead>
+                            <tr>
+                                <th>Dzień</th>
+                                <th>Godziny</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {Object.entries(restaurant.opening_hours)
+                                .sort(([dayA], [dayB]) => weekDaysOrder.indexOf(dayA) - weekDaysOrder.indexOf(dayB))
+
+                                .map(([day, hours]) => (
+
                                     <tr key={day}>
                                         <td>{day}</td>
                                         <td>{hours}</td>
                                     </tr>
+
                                 ))}
+                            </tbody>
 
-
-                            </table>
-                        ) : (
-                            <p>Brak danych</p>
-                        )}
-
+                        </table>
                     </div>
                 </div>
 

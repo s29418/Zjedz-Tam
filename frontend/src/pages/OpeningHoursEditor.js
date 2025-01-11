@@ -23,10 +23,20 @@ function OpeningHoursEditor( ) {
         fetchOpeningHours();
     }, [id]);
 
+    const validateOpeningHours = (value) => {
+        const timeRegex = /^([01]\d|2[0-3]):[0-5]\d-([01]\d|2[0-3]):[0-5]\d$/;
+        const closedRegex = "zamknięte"
+        if (timeRegex.test(value) || value.toString().toLowerCase() === closedRegex) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     const handleInputChange = (day, value) => {
         setOpeningHours((prev) => ({
             ...prev,
-            [day]: value || "Zamknięte",
+            [day]: value,
         }));
     };
 
@@ -34,10 +44,20 @@ function OpeningHoursEditor( ) {
         e.preventDefault();
 
 
+        Object.entries(openingHours).forEach(([day, value]) => {
+            if (!validateOpeningHours(value)) {
+                window.location.reload();
+                alert(`Nieprawidłowy format godzin otwarcia dla dnia ${day}.`);
+            }
+        });
+
         try {
             const response = await fetch(`http://localhost:8000/api/restaurants/${id}/opening-hours`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8",
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: JSON.stringify({ opening_hours: openingHours }),
             });
 
@@ -66,7 +86,7 @@ function OpeningHoursEditor( ) {
                                 {day}:
                                 <input
                                     type="text"
-                                    value={openingHours[day] || "Zamknięte"}
+                                    value={openingHours[day]}
                                     className="userInput"
                                     onChange={(e) => handleInputChange(day, e.target.value)}
                                 />

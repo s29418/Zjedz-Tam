@@ -53,8 +53,8 @@ function RestaurantDetails() {
             {isAdminForRestaurant(id) ? (
                 <div className="adminPannel">
                     <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/edit`)}>Edytuj restauracje</button>
-                    <button className="adminButton" onClick={() => handleDelete()}>Usuń restauracje</button>
                     <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/access`)}>Zarządzaj dostępem</button>
+                    <button className="adminButton3" onClick={() => handleDelete()}>Usuń restauracje</button>
                 </div>
             ) : null}
 

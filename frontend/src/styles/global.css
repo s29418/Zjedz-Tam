@@ -376,6 +376,18 @@ form {
     cursor: pointer;
 }
 
+.adminButton3{
+    background-color: rgb(182, 6, 6);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-right: 20px;
+    padding: 10px;
+    font-size: 26px;
+    font-family: Gadugi, sans-serif;
+    cursor: pointer;
+}
+
 .addrestaurant{
     margin-bottom: 50px;
 }

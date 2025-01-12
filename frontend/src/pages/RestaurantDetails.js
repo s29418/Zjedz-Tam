@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
-import { jwtDecode } from "jwt-decode";
+import { hasPermission } from "../utils/permissions";
 
 function RestaurantDetails() {
     const { id } = useParams();
@@ -16,17 +16,6 @@ function RestaurantDetails() {
     }, [id]);
 
     if (!restaurant) return <p>Loading...</p>;
-
-    const isAdminForRestaurant = (restaurantId) => {
-        const token = localStorage.getItem("token");
-        if (!token) return false;
-
-        const decoded = jwtDecode(token);
-
-        return decoded.restaurantRoles.some(
-            (role) => String(role.restaurant_id) === String(restaurantId) && role.RestaurantUserRoles_id === 2
-        );
-    };
 
     const handleDelete = async () => {
         const response = await fetch(`http://localhost:8000/api/restaurants/${id}`, {
@@ -50,7 +39,7 @@ function RestaurantDetails() {
 
     return (
         <div>
-            {isAdminForRestaurant(id) ? (
+            {hasPermission(id, 2) ? (
                 <div className="adminPannel">
                     <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/edit`)}>Edytuj restauracje</button>
                     <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/access`)}>Zarządzaj dostępem</button>
@@ -76,7 +65,7 @@ function RestaurantDetails() {
 
                         <h2>Godziny otwarcia:</h2>
 
-                        {isAdminForRestaurant(id) ? (
+                        {hasPermission(id, 2) ? (
                             <div>
                                 <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/opening-hours`)}>Edytuj godziny otwarcia</button>
                             </div>

@@ -12,6 +12,8 @@ import EditRestaurant from "./pages/EditRestaurant";
 import RestaurantAccessManager from "./pages/RestaurantAccessManager";
 import RestaurantAccessManagerGrant from "./pages/RestaurantAccessManagerGrant";
 import OpeningHoursEditor from "./pages/OpeningHoursEditor";
+import AddMenuItemForm from "./pages/AddMenuItemForm";
+import EditMenuItemForm from "./pages/EditMenuItemForm";
 
 const App = () => {
     return (
@@ -23,17 +25,19 @@ const App = () => {
                         <Route path="/" element={<HomePage />} />
 
                         <Route path="/restaurants/:id" element={<RestaurantDetails />} />
+
                         <Route path="/addRestaurant" element={<AddRestaurant />} />
                         <Route path="/restaurants/:id/edit" element={<EditRestaurant />} />
+
                         <Route path="/restaurants/:id/access" element={<RestaurantAccessManager />} />
                         <Route path="/restaurants/:id/grantAccess" element={<RestaurantAccessManagerGrant />} />
-                        <Route path="/restaurants/:id/opening-hours" element={<OpeningHoursEditor />} />
 
+                        <Route path="/restaurants/:id/opening-hours" element={<OpeningHoursEditor />} />
+                        <Route path="/restaurants/:id/menus/add" element={<AddMenuItemForm />} />
+                        <Route path="/restaurants/:id/menus/edit/:itemId" element={< EditMenuItemForm />} />
 
                         <Route path="/login" element={<Registration />} />
                         <Route path="/profile" element={<ProfilePage />} />
-                        {/*<Route path="/search" element={<SearchPage />} />*/}
-                        {/*<Route path="/about" element={<AboutPage />} />*/}
                     </Routes>
                 </main>
                 <Footer />

@@ -4,6 +4,7 @@ const restaurantRoutes = require('./routes/restaurantRoutes');
 const authRoutes = require('./routes/authRoutes');
 const menuRoutes = require('./routes/menuRoutes');
 const restaurantRolesRoutes = require('./routes/restaurantRolesRoutes');
+const tableRoutes = require('./routes/tableRoutes');
 const path = require('path');
 const cors = require('cors');
 
@@ -18,6 +19,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/restaurants', restaurantRoutes);
 app.use('/api/menus', menuRoutes);
 app.use('/api/roles', restaurantRolesRoutes);
+app.use('/api/tables', tableRoutes);
 
 
 app.listen(PORT);

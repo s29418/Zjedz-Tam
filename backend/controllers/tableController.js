@@ -1,8 +1,10 @@
 const db = require('../models/db');
 
-exports.getTables = async (req, res) => {
+exports.getTablesForRestaurant = async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM Restauranttable');
+        // const restaurantId = req.params.id;
+        const restaurantId = req.query.restaurant_id;
+        const [rows] = await db.query('SELECT * FROM Restauranttable WHERE restaurant_id = ?', [restaurantId]);
         res.status(200).json(rows);
     } catch (error) {
         res.status(500).json({ error: 'Błąd serwera' });
@@ -25,9 +27,9 @@ exports.getTable = async (req, res) => {
 
 exports.addTable = async (req, res) => {
     try{
-        const restaurantId = req.params.id;
+        const restaurantId = req.query.restaurant_id;
         const { seats, description } = req.body;
-        await db.query('INSERT INTO Restauranttable (seats, description, restauran_id) VALUES (?, ?, ?)', [seats, description, restaurantId]);
+        await db.query('INSERT INTO RestaurantTable (seats, description, restaurant_id) VALUES (?, ?, ?)', [seats, description, restaurantId]);
         res.status(201).json({ message: 'Dodano stolik' });
     } catch (error) {
         res.status(500).json({ error: 'Błąd serwera.'});

@@ -18,6 +18,7 @@ function RestaurantDetails() {
     if (!restaurant) return <p>Loading...</p>;
 
     const handleDelete = async () => {
+        if (!window.confirm("Czy na pewno chcesz usunąć tę restaurację?")) return;
         const response = await fetch(`http://localhost:8000/api/restaurants/${id}`, {
             method: 'DELETE',
             headers: {
@@ -41,8 +42,17 @@ function RestaurantDetails() {
         <div>
             {hasPermission(id, 2) ? (
                 <div className="adminPannel">
-                    <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/edit`)}>Edytuj restauracje</button>
-                    <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/access`)}>Zarządzaj dostępem</button>
+
+                    <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/tables`)}>Zarządzaj
+                        stolikami w restuaracji
+                    </button>
+                    <br />
+                    <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/edit`)}>Edytuj
+                        restauracje
+                    </button>
+                    <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/access`)}>Zarządzaj
+                        dostępem
+                    </button>
                     <button className="adminButton3" onClick={() => handleDelete()}>Usuń restauracje</button>
                 </div>
             ) : null}

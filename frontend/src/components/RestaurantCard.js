@@ -8,8 +8,9 @@ function RestaurantCard({ restaurant }) {
     const { isAdmin } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const handleDelete = async () => {
-        const response = await fetch(`http://localhost:8000/api/restaurants/${restaurant.restaurant_id}`, {
+    const handleDelete = async (id) => {
+        console.log(id);
+        const response = await fetch(`http://localhost:8000/api/restaurants/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -48,7 +49,9 @@ function RestaurantCard({ restaurant }) {
                             onClick={() => navigate(`/restaurants/${restaurant.restaurant_id}/access`)}>Zarządzaj dostępem
                     </button>
                     <br/>
-                    <button className="adminButton2" style={{backgroundColor: "#B60606FF"}} onClick={() => handleDelete()}>Usuń</button>
+                    <button className="adminButton2" style={{backgroundColor: "#B60606FF"}}
+                            onClick={() => handleDelete(restaurant.restaurant_id)}>Usuń
+                    </button>
                 </div>
             )}
         </div>

@@ -14,7 +14,9 @@ import RestaurantAccessManagerGrant from "./pages/RestaurantAccessManagerGrant";
 import OpeningHoursEditor from "./pages/OpeningHoursEditor";
 import AddMenuItemForm from "./pages/AddMenuItemForm";
 import EditMenuItemForm from "./pages/EditMenuItemForm";
-import Reservation from "./pages/Reservation";
+import Reservations from "./pages/Reservations";
+import MakeReservation from "./pages/MakeReservation";
+import EditReservation from "./pages/EditReservation";
 import Tables from "./pages/Tables";
 import AddTable from "./pages/AddTable";
 import EditTable from "./pages/EditTable";
@@ -44,7 +46,9 @@ const App = () => {
                         <Route path="/restaurants/:id/tables/add" element={<AddTable />} />
                         <Route path="/restaurants/:id/tables/edit/:tableId" element={<EditTable />} />
 
-                        <Route path="/reservation/:id" element={< Reservation /> } />
+                        <Route path="/reservation/:id" element={< Reservations /> } />
+                        <Route path="/reservation/:id/add" element={< MakeReservation /> } />
+                        <Route path="/reservation/:id/edit/:reservationId" element={< EditReservation /> } />
 
                         <Route path="/login" element={<Registration />} />
                         <Route path="/profile" element={<ProfilePage />} />

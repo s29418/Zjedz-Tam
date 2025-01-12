@@ -364,6 +364,21 @@ form {
     cursor: pointer;
 }
 
+.reservation-ul{
+    list-style-type: none;
+}
+
+.reservation-li{
+    font-family: Gadugi, sans-serif;
+    font-size: 20px;
+    border: #2b4219 solid 2px;
+    margin: 50px;
+    padding: 20px;
+    border-radius: 15px;
+    margin-right: 50%;
+    /*color: #2b4219;*/
+}
+
 .adminButton2{
     background-color: #3a5721;
     color: white;

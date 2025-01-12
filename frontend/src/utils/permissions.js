@@ -9,6 +9,6 @@ export const hasPermission = (restaurantId, levelOfAccess) => {
     return decoded.restaurantRoles.some(
         (role) =>
             String(role.restaurant_id) === String(restaurantId) &&
-            role.RestaurantUserRoles_id === levelOfAccess
+            role.RestaurantUserRoles_id >= levelOfAccess
     );
 };

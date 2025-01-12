@@ -34,19 +34,24 @@ function RestaurantDetails() {
 
     const weekDaysOrder = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
 
-    const handleReservationClick = () => {
-        navigate(`/reservation/${id}`);
-    };
 
     return (
         <div>
-            {hasPermission(id, 2) ? (
+            {hasPermission(id, 1) ? (
                 <div className="adminPannel">
-
+                    <button className="adminButton"
+                            onClick={() => navigate(`/reservation/${id}`)}>
+                        Zarządzaj rezerwacjami
+                    </button>
                     <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/tables`)}>Zarządzaj
                         stolikami w restuaracji
                     </button>
-                    <br />
+                </div>
+            ) : null}
+
+
+            {hasPermission(id, 2) ? (
+                <div className="adminPannel">
                     <button className="adminButton" onClick={() => navigate(`/restaurants/${id}/edit`)}>Edytuj
                         restauracje
                     </button>
@@ -70,7 +75,7 @@ function RestaurantDetails() {
 
                     <div className="opening-hours">
 
-                        <button className="reservationButton" onClick={handleReservationClick}>Zarezerwuj stolik
+                        <button className="reservationButton" onClick={() => navigate(`/reservation/${id}/add`)}>Zarezerwuj stolik
                         </button>
 
                         <h2>Godziny otwarcia:</h2>

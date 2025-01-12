@@ -18,12 +18,21 @@ exports.verifyToken = (req, res, next) => {
     }
 };
 
+
 exports.verifyRole = (role) => (req, res, next) => {
     if (req.user.role !== role) {
         return res.status(403).json({ error: 'Brak dostępu' });
     }
     next();
 }
+
+exports.verifyRegistered = (req, res, next) => {
+    if (Number(req.user.role) === 1 || Number(req.user.role) === 2) {
+        return next();
+    } else {
+        return res.status(403).json({ error: 'Brak dostępu' });
+    }
+};
 
 
 exports.verifyAdminOrRestaurantAdmin = (req, res, next) => {

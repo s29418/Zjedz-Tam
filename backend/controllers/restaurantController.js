@@ -144,29 +144,3 @@ exports.updateOpeningHours = async (req, res) => {
         res.status(500).json({ error: "Błąd serwera." });
     }
 };
-
-
-
-exports.getAverageRating = async (req, res) => {
-    try {
-        const restaurantId = req.params.id;
-        const [rows] = await db.query('SELECT AVG(rating) AS av_rating FROM Review WHERE restaurant_id = ?', [restaurantId]);
-        console.log(rows);
-        const averageRating = rows[0].av_rating || 0;
-        res.status(200).json({ averageRating });
-    } catch (error) {
-        res.status(500).json({ error: 'Błąd serwera.' });
-    }
-}
-
-exports.getNumberOfReviews = async (req, res) => {
-    try {
-        const restaurantId = req.params.id;
-        const [rows] = await db.query('SELECT COUNT(*) AS num_of_reviews FROM Review WHERE restaurant_id = ?', [restaurantId]);
-        console.log(rows);
-        const numberOfReviews = rows[0].num_of_reviews || 0;
-        res.status(200).json({ numberOfReviews });
-    } catch (error) {
-        res.status(500).json({ error: 'Błąd serwera.' });
-    }
-}

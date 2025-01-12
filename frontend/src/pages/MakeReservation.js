@@ -75,11 +75,13 @@ function MakeReservation() {
             table_id: selectedTable,
             user_id: jwtDecode(localStorage.getItem("token")).id,
         };
+        const token = localStorage.getItem("token");
 
         try {
             const response = await fetch(`http://localhost:8000/api/reservations?restaurant_id=${restaurantId}`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`},
                 body: JSON.stringify(newReservation),
             });
 

@@ -7,8 +7,6 @@ const {
     addRestaurant,
     updateRestaurant,
     deleteRestaurant,
-    getAverageRating,
-    getNumberOfReviews,
     getAccessForRestaurant,
     revokeAccess,
     grantAccess,
@@ -22,9 +20,6 @@ router.get('/:id', getRestaurant);
 router.get('/:id/access', getAccessForRestaurant, verifyAdminOrRestaurantAdmin, revokeAccess);
 router.delete('/:id/access', verifyToken, verifyAdminOrRestaurantAdmin, revokeAccess);
 router.post('/:id/access', verifyToken, verifyAdminOrRestaurantAdmin, grantAccess);
-
-router.get('/:id/avRating', getAverageRating);
-router.get('/:id/numberOfReviews', getNumberOfReviews);
 
 router.post('/', verifyToken, verifyRole(2), addRestaurant);
 router.put('/:id', verifyToken, verifyAdminOrRestaurantAdmin, updateRestaurant);

@@ -8,9 +8,11 @@ const ProfilePage = () => {
     const token = localStorage.getItem("token");
 
     const getUserIdFromToken = (token) => {
+        console.log("token", token);
         if (!token) return null;
         try {
             const decoded = jwtDecode(token);
+            console.log("decoded", decoded.id);
             return decoded.id;
         } catch (error) {
             console.error("Błąd dekodowania tokena:", error);
@@ -43,9 +45,17 @@ const ProfilePage = () => {
 
     useEffect(() => {
         if (userId) {
-            fetch(`http://localhost:8000/api/reservations/user/${userId}`)
+            fetch(`http://localhost:8000/api/reservations/user/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                }
+            })
                 .then((res) => res.json())
-                .then((data) => setReservations(data))
+                .then((data) => {
+                    setReservations(data)
+                    console.log("Rezerwacje:", data);
+                })
                 .catch((err) => console.error("Błąd pobierania rezerwacji:", err));
         }
     }, [userId]);

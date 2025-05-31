@@ -1,74 +1,201 @@
-<<<<<<< HEAD
-# Zjedz-Tam
-=======
-# Getting Started with Create React App
+# 🍽️ Zjedz Tam!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Zjedz Tam!** to aplikacja webowa umożliwiająca rezerwację stolików w restauracjach. Projekt został stworzony jako część mojego portfolio programistcznego i ma na celu pokazanie moich umiejętności w tworzeniu pełnych aplikacji (full-stack) – zarówno po stronie frontendowej, jak i backendowej.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ✨ Główne funkcjonalności
 
-### `npm start`
+- ✅ Rejestracja i logowanie użytkownika z JWT
+- ✅ Przegląd restauracji i szczegółowe informacje
+- ✅ Rezerwacja stolika na konkretną datę i godzinę
+- ✅ Panel użytkownika z historią rezerwacji
+- ✅ Obsługa autoryzacji przy każdej interakcji z backendem
+- ✅ Zabezpieczenie endpointów za pomocą middleware
+- ✅ Walidacja danych po stronie frontendowej i backendowej
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Technologie
 
-### `npm test`
+**Frontend:**
+- React
+- HTML / CSS
+- JavaScript
+- Context API
+- Fetch API
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Backend:**
+- Node.js + Express
+- JWT (autoryzacja)
+- MySQL
+- REST API
 
-### `npm run build`
+**Inne:**
+- bcrypt (hashowanie haseł)
+- środowisko lokalne (MySQL)
+- Postman (testowanie API)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📁 Struktura projektu
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+Zjedz-Tam/
+├── backend/            # Backend - Node.js + Express + MySQL
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── models/
+│   ├── routes/
+│   ├── server.js
+│   └── .env            # Konfiguracja serwera
+├── frontend/           # Frontend - React
+│   ├── public/
+│   └── src/
+│       ├── components/
+│       └── context/
+│           └── UserContext.js
+│       ├── pages/
+│       ├── styles/
+│       └── utils/
+├── database/           # Skrypty bazy danych i model ERD
+│   ├── db_create.sql
+│   ├── db_values.sql
+│   └── db-model.png
+└── README.md
+```
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## ⚙️ Konfiguracja i uruchomienie projektu lokalnie
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 📦 Wymagania wstępne
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Node.js (v16+)
+- MySQL
+- Git
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### 🗃️ Krok 1: Utworzenie bazy danych
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Uruchom lokalny serwer MySQL
+2. Zaloguj się do MySQL.
+3. W katalogu `database/` znajdują się 2 pliki SQL:
+   - `db_create.sql` – tworzy strukturę bazy danych
+   - `db_values.sql` – wstawia dane przykładowe
+4. Wykonaj te pliki w kolejności:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sql
+-- Najpierw struktura
+SOURCE /ścieżka/do/database/db_create.sql;
 
-### Code Splitting
+-- Następnie dane przykładowe
+SOURCE /ścieżka/do/database/db_values.sql;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+📌 Uwaga: upewnij się, że masz utworzoną bazę danych `zjedz_tam` lub zmodyfikuj nazwę bazy w plikach SQL i `.env`.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 🔑 Krok 2: Konfiguracja środowiska
 
-### Making a Progressive Web App
+> ℹ️ **Uwaga:** Plik `.env` został dołączony do repozytorium dla wygody testowania aplikacji lokalnie. Zawiera domyślne dane (np. root/admin) i może być bezpiecznie używany w środowisku lokalnym.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### 📁 backend/.env
 
-### Advanced Configuration
+```
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=admin
+DB_NAME=zjedz_tam
+DB_PORT=3306
+PORT=8000
+JWT_SECRET=sekretnysekret
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### 📁 frontend/.env
 
-### Deployment
+```
+BACKEND_URL=http://localhost:8000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+### 🧩 Krok 3: Instalacja zależności
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> a130158 (Initialize project using Create React App)
+**Backend:**
+```bash
+cd backend
+npm install
+```
+
+**Frontend:**
+```bash
+cd ../frontend
+npm install
+```
+
+---
+
+### 🚀 Krok 4: Uruchomienie aplikacji
+
+**Uruchom backend:**
+```bash
+cd backend
+npm run dev
+```
+
+**Uruchom frontend:**
+```bash
+cd ../frontend
+npm start
+```
+
+Aplikacja będzie dostępna pod adresem: [http://localhost:3000](http://localhost:3000)
+
+---
+
+### 📊 Model bazy danych
+
+Schemat ERD znajduje się w pliku:
+
+```
+/database/db-model.png
+```
+
+---
+
+## 🧠 Czego się nauczyłem
+
+- Integracji frontend ↔ backend z użyciem tokenów JWT
+- Obsługi zapytań do MySQL z poziomu Node.js
+- Uwierzytelniania i autoryzacji w aplikacjach SPA
+- Dobrej organizacji kodu w projekcie fullstack
+- Pracy z błędami i obsługi wyjątków
+
+---
+
+## 📚 Plany rozwoju
+
+- [ ] System powiadomień o rezerwacjach
+- [ ] Edytowanie/Anulowanie rezerwacji
+- [ ] Obsługa wielu restauracji jako użytkowników "właścicieli"
+- [ ] Dodanie testów jednostkowych i integracyjnych
+
+---
+
+## 📸 Screeny (opcjonalne)
+
+Dodaj tu 2–3 screeny z aplikacji (np.):
+- Strona główna z listą restauracji
+- Formularz rezerwacji
+- Panel użytkownika z historią rezerwacji
+
+---
+
+
+## 📫 Kontakt
+
+- GitHub: [@s29418](https://github.com/s29418)
+- Email: _kulasmikolaj00@gmail.com_

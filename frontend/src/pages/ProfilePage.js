@@ -53,16 +53,22 @@ const ProfilePage = () => {
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    setReservations(data)
-                    console.log("Rezerwacje:", data);
+                    console.log("Rezerwacje response:", data);
+
+                    if (Array.isArray(data)) {
+                        setReservations(data);
+                    } else if (Array.isArray(data.reservations)) {
+                        setReservations(data.reservations);
+                    } else {
+                        console.warn("Nieprawidłowa struktura danych:", data);
+                        setReservations([]);
+                    }
                 })
                 .catch((err) => console.error("Błąd pobierania rezerwacji:", err));
         }
     }, [userId]);
 
-    if (!user) {
-        return <p>Nie jesteś zalogowany!</p>;
-    }
+    if (!user) return <p>Nie jesteś zalogowany!</p>;
 
     return (
         <div>

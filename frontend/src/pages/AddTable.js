@@ -6,6 +6,7 @@ function AddTable() {
     const [description, setDescription] = useState('');
 
     const restaurantId = useParams().id;
+    const token = localStorage.getItem("token");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,7 +30,8 @@ function AddTable() {
         try {
             const response = await fetch(`http://localhost:8000/api/tables?restaurant_id=${restaurantId}`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`},
                 body: JSON.stringify(newTable),
             });
 

@@ -1,4 +1,5 @@
 const db = require('../models/db');
+const bcrypt = require('bcryptjs');
 
 exports.getReservationsForRestaurant = async (req, res) => {
     const restaurantId = req.params.restaurantId;

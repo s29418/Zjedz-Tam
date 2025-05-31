@@ -41,7 +41,7 @@ function MakeReservation() {
 
         const startTime = new Date(reservationStart);
         const endTime = new Date(startTime);
-        startTime.setHours(startTime.getHours() + 1);
+        startTime.setHours(startTime.getHours());
         endTime.setHours(startTime.getHours() + Number(reservationDuration));
         const endTimeString = endTime.toISOString().slice(0, 16);
 
@@ -58,8 +58,13 @@ function MakeReservation() {
         const [openHour, openMinute] = openingTime.split(":").map(num => parseInt(num));
         const [closeHour, closeMinute] = closingTime.split(":").map(num => parseInt(num));
 
-        if (startTime.getHours() < openHour || (startTime.getHours() === openHour && startTime.getMinutes() < openMinute) ||
-            endTime.getHours() > closeHour || (endTime.getHours() === closeHour && endTime.getMinutes() > closeMinute)) {
+        const openDate = new Date(startTime);
+        openDate.setHours(openHour, openMinute, 0, 0);
+
+        const closeDate = new Date(startTime);
+        closeDate.setHours(closeHour, closeMinute, 0, 0);
+
+        if (endTime < openDate || startTime < openDate || endTime > closeDate) {
             alert("Rezerwacja nie mieści się w godzinach otwarcia restauracji.");
             return;
         }

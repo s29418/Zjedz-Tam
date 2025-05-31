@@ -9,6 +9,7 @@ function AddMenuItemForm({ onSubmit }) {
     const [categories, setCategories] = useState([]);
 
     const restaurantId = useParams().id;
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
         fetch(`http://localhost:8000/api/menus/categories/${restaurantId}`)
@@ -44,7 +45,9 @@ function AddMenuItemForm({ onSubmit }) {
         try {
             const response = await fetch(`http://localhost:8000/api/menus/items/`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(newItem),
             });
 

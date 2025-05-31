@@ -20,14 +20,18 @@ const Reservations = () => {
         return new Intl.DateTimeFormat('pl-PL', options).format(date);
     };
 
+    const token = localStorage.getItem('token');
+
     const fetchReservations = (page) => {
-        fetch(`http://localhost:8000/api/reservations/restaurant/${id}?page=${page}&limit=5`)
-            .then((res) => res.json())
+        fetch(`http://localhost:8000/api/reservations/restaurant/${id}?page=${page}&limit=5`, { method: 'GET',
+            headers: { "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`}, })
+            .then(res => res.json())
             .then((data) => {
-                setReservations(data.reservations);
-                setPagination(data.pagination);
+                setReservations(data.reservations || []);
+                setPagination(data.pagination || { page: 1, totalPages: 1, totalReservations: 0 });
             })
-            .catch((err) => console.error(err));
+            .catch(err => console.error(err));
     };
 
     useEffect(() => {
@@ -35,10 +39,13 @@ const Reservations = () => {
     }, [id, pagination.page]);
 
     const deleteReservation = (reservationId) => {
-        fetch(`http://localhost:8000/api/reservations/${reservationId}`, { method: 'DELETE' })
+        fetch(`http://localhost:8000/api/reservations/${reservationId}`, { method: 'DELETE'
+            , headers: { "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` }
+            })
             .then((res) => {
                 if (res.ok) {
-                    setReservations((prev) => prev.filter((res) => res.reservation_id !== reservationId));
+                    window.location.reload();
                 } else {
                     console.error('Failed to delete reservation');
                 }
@@ -57,20 +64,24 @@ const Reservations = () => {
             <h2 className="addrestaurant">Rezerwacje:</h2>
 
             <ul className="reservation-ul">
-                {reservations.map((res) => (
-                    <li className="reservation-li" key={res.reservation_id}>
-                        <div>
-                            <p>
-                                <strong>Restauracja:</strong> {res.restaurant_name}<br />
-                                <strong>Rezerwujący:</strong> {res.customer_name} ({res.customer_email}, id: {res.user_id})<br />
-                                <strong>Data:</strong> {formatDate(res.reservation_start)} - {formatDate(res.reservation_end)}<br />
-                                <strong>Stolik:</strong> Miejsca: {res.seats} ({res.description}, id: {res.table_id})<br />
-                            </p>
-                            <button className="adminButton2" onClick={() => navigate(`/reservation/${id}/edit/${res.reservation_id}`)}>Edytuj</button>
-                            <button className="adminButton2" style={{ backgroundColor: "#B60606FF" }} onClick={() => deleteReservation(res.reservation_id)}>Anuluj</button>
-                        </div>
-                    </li>
-                ))}
+                {Array.isArray(reservations) && reservations.length > 0 ? (
+                    reservations.map((res) => (
+                        <li className="reservation-li" key={res.reservation_id}>
+                            <div>
+                                <p>
+                                    <strong>Restauracja:</strong> {res.restaurant_name}<br />
+                                    <strong>Rezerwujący:</strong> {res.customer_name} ({res.customer_email}, id: {res.user_id})<br />
+                                    <strong>Data:</strong> {formatDate(res.reservation_start)} - {formatDate(res.reservation_end)}<br />
+                                    <strong>Stolik:</strong> Miejsca: {res.seats} ({res.description}, id: {res.table_id})<br />
+                                </p>
+                                <button className="adminButton2" onClick={() => navigate(`/reservation/${id}/edit/${res.reservation_id}`)}>Edytuj</button>
+                                <button className="adminButton2" style={{ backgroundColor: "#B60606FF" }} onClick={() => deleteReservation(res.reservation_id)}>Anuluj</button>
+                            </div>
+                        </li>
+                    ))
+                ) : (
+                    <p>Brak rezerwacji do wyświetlenia</p>
+                )}
             </ul>
 
             <div className="pagination">

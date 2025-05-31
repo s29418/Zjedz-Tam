@@ -39,9 +39,11 @@ function EditTable() {
         };
 
         try {
+            const token = localStorage.getItem("token");
             const response = await fetch(`http://localhost:8000/api/tables/${tableId}`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`},
                 body: JSON.stringify({ ...updatedTable, table_id: tableId }),
             });
 

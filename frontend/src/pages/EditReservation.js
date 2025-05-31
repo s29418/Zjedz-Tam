@@ -54,9 +54,12 @@ function EditReservation() {
         };
 
         try {
+            const token = localStorage.getItem("token");
             const response = await fetch(`http://localhost:8000/api/reservations/${reservationId}`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(updatedReservation),
             });
 

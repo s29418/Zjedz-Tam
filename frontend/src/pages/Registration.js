@@ -81,7 +81,6 @@ function Registration() {
         }
     };
 
-
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
 

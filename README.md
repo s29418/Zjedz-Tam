@@ -1,18 +1,91 @@
 # 🍽️ Zjedz Tam!
 
-**Zjedz Tam!** to aplikacja webowa umożliwiająca rezerwację stolików w restauracjach. Projekt został stworzony jako część mojego portfolio programistcznego i ma na celu pokazanie moich umiejętności w tworzeniu pełnych aplikacji (full-stack) – zarówno po stronie frontendowej, jak i backendowej.
+**Zjedz Tam!** to aplikacja webowa umożliwiająca rezerwację stolików w restauracjach.
+
+Projekt został stworzony z myślą o rozwijaniu praktycznych umiejętności full-stack i stanowi element mojego portfolio. Aplikacja zawiera funkcjonalności zarówno dla użytkowników, jak i administratorów (z podziałem na role), a także backend z bazą danych i interfejsem API.
 
 ---
 
 ## ✨ Główne funkcjonalności
 
-- ✅ Rejestracja i logowanie użytkownika z JWT
-- ✅ Przegląd restauracji i szczegółowe informacje
-- ✅ Rezerwacja stolika na konkretną datę i godzinę
-- ✅ Panel użytkownika z historią rezerwacji
-- ✅ Obsługa autoryzacji przy każdej interakcji z backendem
-- ✅ Zabezpieczenie endpointów za pomocą middleware
-- ✅ Walidacja danych po stronie frontendowej i backendowej
+### Użytkownik
+- Rejestracja i logowanie z użyciem JWT
+- Przegląd dostępnych restauracji i szczegółowych informacji
+- Rezerwacja stolika na konkretną datę i godzinę
+- Panel użytkownika z historią rezerwacji
+- Walidacja danych (frontend + backend)
+- Autoryzacja żądań do API i middleware chroniący zasoby
+
+### Administrator restauracji
+- Zarządzanie rezerwacjami w swojej restauracji (podgląd, edycja, anulowanie)
+- Dodawanie i edytowanie stolików z przypisaną liczbą miejsc
+- Tworzenie i edycja menu z podziałem na kategorie
+- Ustalanie godzin otwarcia lokalu
+- Zarządzanie dostępem – możliwość przypisania innych użytkowników jako współadminów lokalu
+
+*W aplikacji istnieje także rola administratora systemowego z uprawnieniami do tworzenia i usuwania restauracji oraz zarządzania dostępami.*
+
+
+---
+
+## 📸 Zrzuty ekranu
+
+### Strona główna użytkownika
+![Strona główna](screenshots/Home.png)  
+Użytkownik widzi listę dostępnych restauracji z miniaturą, nazwą i krótkim opisem.
+
+---
+
+### Szczegóły restauracji
+![Szczegóły restauracji](screenshots/RestaurantPage.png)  
+Kliknięcie w restaurację prowadzi do strony z pełnym opisem, adresem i przyciskiem do rezerwacji.
+
+---
+
+### Widok menu i godzin otwarcia
+![Godziny i menu](screenshots/RestaurantPageInfo.png)  
+Informacje o godzinach otwarcia i aktualne menu podzielone na kategorie.
+
+---
+
+### Formularz rezerwacji
+![Rezerwacja](screenshots/Reservation.png)  
+Użytkownik wybiera datę, godzinę, czas trwania rezerwacji oraz dostępny stolik.
+
+---
+
+## Widoki administracyjne
+
+Aplikacja zawiera dwa poziomy uprawnień administracyjnych:  
+• **Admin restauracji** – zarządza pojedynczym lokalem  
+• **Admin systemu** – zarządza wszystkimi restauracjami
+
+---
+
+### Admin systemu – panel zarządzania restauracjami
+![Admin systemowy – lista restauracji](screenshots/HomeAdmin.png)  
+Zarządzanie wszystkimi restauracjami w systemie: dodawanie, edycja, zarządzanie dostępem.
+
+---
+
+###  Admin restauracji – panel restauracji
+![Admin restauracji – szczegóły](screenshots/RestaurantPageAdmin.png)  
+Możliwość edycji danych lokalu, zarządzania stolikami, rezerwacjami i menu.
+
+---
+
+###  Admin restauracji – edycja godzin i menu
+![Godziny i menu – admin](screenshots/RestaurantPageInfoAdmin.png)
+
+---
+
+###  Admin restauracji – widok rezerwacji
+![Admin restauracji – rezerwacje](screenshots/RestaurantReservations.png)
+
+---
+
+###  Admin restauracji – edycja stolików
+![Stoliki](screenshots/RestaurantTables.png)
 
 ---
 
@@ -40,44 +113,28 @@
 
 ## 📁 Struktura projektu
 
-```
-Zjedz-Tam/
-├── backend/            # Backend - Node.js + Express + MySQL
-│   ├── controllers/
-│   ├── middlewares/
-│   ├── models/
-│   ├── routes/
-│   ├── server.js
-│   └── .env            # Konfiguracja serwera
-├── frontend/           # Frontend - React
-│   ├── public/
-│   └── src/
-│       ├── components/
-│       └── context/
-│           └── UserContext.js
-│       ├── pages/
-│       ├── styles/
-│       └── utils/
-├── database/           # Skrypty bazy danych i model ERD
-│   ├── db_create.sql
-│   ├── db_values.sql
-│   └── db-model.png
-└── README.md
-```
+Projekt jest podzielony na trzy główne części:
+
+- `frontend/` - aplikacja React (strony, komponenty, style, kontekst użytkownika)
+- `backend/` - serwer Node.js + Express (modele, kontrolery, middleware, routes)
+- `database/` - pliki SQL do utworzenia i zapełnienia bazy danych, model ERD
+
+Dodatkowo:
+- `screenshots/` - zrzuty ekranu do dokumentacji
+- `README.md` - plik z opisem projektu
 
 ---
 
 ## ⚙️ Konfiguracja i uruchomienie projektu lokalnie
 
-### 📦 Wymagania wstępne
+###  Wymagania wstępne
 
 - Node.js (v16+)
 - MySQL
-- Git
 
 ---
 
-### 🗃️ Krok 1: Utworzenie bazy danych
+###  Krok 1: Utworzenie bazy danych
 
 1. Uruchom lokalny serwer MySQL
 2. Zaloguj się do MySQL.
@@ -94,15 +151,15 @@ SOURCE /ścieżka/do/database/db_create.sql;
 SOURCE /ścieżka/do/database/db_values.sql;
 ```
 
-📌 Uwaga: upewnij się, że masz utworzoną bazę danych `zjedz_tam` lub zmodyfikuj nazwę bazy w plikach SQL i `.env`.
+ Uwaga: upewnij się, że masz utworzoną bazę danych `zjedz_tam` lub zmodyfikuj nazwę bazy w pliku `.env`.
 
 ---
 
-### 🔑 Krok 2: Konfiguracja środowiska
+### Krok 2: Konfiguracja środowiska
 
-> ℹ️ **Uwaga:** Plik `.env` został dołączony do repozytorium dla wygody testowania aplikacji lokalnie. Zawiera domyślne dane (np. root/admin) i może być bezpiecznie używany w środowisku lokalnym.
+>  **Uwaga:** Plik `.env` został dołączony do repozytorium dla wygody testowania aplikacji lokalnie. Zawiera domyślne dane i może być bezpiecznie używany w środowisku lokalnym.
 
-#### 📁 backend/.env
+####  backend/.env:
 
 ```
 DB_HOST=localhost
@@ -114,39 +171,35 @@ PORT=8000
 JWT_SECRET=sekretnysekret
 ```
 
-#### 📁 frontend/.env
-
-```
-BACKEND_URL=http://localhost:8000
-```
-
 ---
 
-### 🧩 Krok 3: Instalacja zależności
+###  Krok 3: Instalacja zależności
 
 **Backend:**
+Przejdź do folderu backend i zainstaluj zależności
 ```bash
 cd backend
-npm install
+npm i
 ```
 
 **Frontend:**
+Przejdź do folderu frontend i zainstaluj zależności
 ```bash
 cd ../frontend
-npm install
+npm i
 ```
 
 ---
 
-### 🚀 Krok 4: Uruchomienie aplikacji
+###  Krok 4: Uruchomienie aplikacji
 
-**Uruchom backend:**
+Uruchom **backend:**
 ```bash
 cd backend
-npm run dev
+node server
 ```
 
-**Uruchom frontend:**
+Uruchom **frontend:**
 ```bash
 cd ../frontend
 npm start
@@ -156,7 +209,7 @@ Aplikacja będzie dostępna pod adresem: [http://localhost:3000](http://localhos
 
 ---
 
-### 📊 Model bazy danych
+## 📊 Model bazy danych
 
 Schemat ERD znajduje się w pliku:
 
@@ -166,34 +219,17 @@ Schemat ERD znajduje się w pliku:
 
 ---
 
-## 🧠 Czego się nauczyłem
-
-- Integracji frontend ↔ backend z użyciem tokenów JWT
-- Obsługi zapytań do MySQL z poziomu Node.js
-- Uwierzytelniania i autoryzacji w aplikacjach SPA
-- Dobrej organizacji kodu w projekcie fullstack
-- Pracy z błędami i obsługi wyjątków
-
----
-
 ## 📚 Plany rozwoju
 
-- [ ] System powiadomień o rezerwacjach
-- [ ] Edytowanie/Anulowanie rezerwacji
-- [ ] Obsługa wielu restauracji jako użytkowników "właścicieli"
-- [ ] Dodanie testów jednostkowych i integracyjnych
+- System recenzji i oceniania restauracji
+- System powiadomień o rezerwacjach
+- Filtrowanie i wyszukiwanie po lokalizacji, nazwie, typie kuchni, ocenie
+- Integracja z mapą
+- Rozszerzony system ról (np. kelner/manager z ograniczonym dostępem)
+- Resetowanie hasła i zarządzanie kontem
+- Dodanie testów jednostkowych i integracyjnych
 
 ---
-
-## 📸 Screeny (opcjonalne)
-
-Dodaj tu 2–3 screeny z aplikacji (np.):
-- Strona główna z listą restauracji
-- Formularz rezerwacji
-- Panel użytkownika z historią rezerwacji
-
----
-
 
 ## 📫 Kontakt
 

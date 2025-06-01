@@ -209,6 +209,20 @@ Aplikacja będzie dostępna pod adresem: [http://localhost:3000](http://localhos
 
 ---
 
+### Dane testowe do logowania
+
+Do przetestowania aplikacji możesz użyć gotowych kont:
+
+1. **Administrator systemu**
+   - Login: `admin@ad.a`
+   - Hasło: `admin123`
+
+2. **Użytkownik (admin restauracji „La Bella Italia”)**
+   - Login: `user@us.u`
+   - Hasło: `user123`
+
+---
+
 ## 📊 Model bazy danych
 
 Schemat ERD znajduje się w pliku:

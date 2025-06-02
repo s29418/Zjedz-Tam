@@ -1,95 +1,96 @@
 # 🍽️ Zjedz Tam!
 
-**Zjedz Tam!** to aplikacja webowa umożliwiająca rezerwację stolików w restauracjach.
+**Zjedz Tam!** is a web application that enables users to book tables at restaurants.
 
-Projekt został stworzony z myślą o rozwijaniu praktycznych umiejętności full-stack i stanowi element mojego portfolio. Aplikacja zawiera funkcjonalności zarówno dla użytkowników, jak i administratorów (z podziałem na role), a także backend z bazą danych i interfejsem API.
+This project was created to develop practical full-stack development skills and is part of my portfolio. The app includes functionality for both users and administrators (with role-based access), along with a backend, database, and API interface.
 
----
-
-## ✨ Główne funkcjonalności
-
-### Użytkownik
-- Rejestracja i logowanie z użyciem JWT
-- Przegląd dostępnych restauracji i szczegółowych informacji
-- Rezerwacja stolika na konkretną datę i godzinę
-- Panel użytkownika z historią rezerwacji
-- Walidacja danych (frontend + backend)
-- Autoryzacja żądań do API i middleware chroniący zasoby
-
-### Administrator restauracji
-- Zarządzanie rezerwacjami w swojej restauracji (podgląd, edycja, anulowanie)
-- Dodawanie i edytowanie stolików z przypisaną liczbą miejsc
-- Tworzenie i edycja menu z podziałem na kategorie
-- Ustalanie godzin otwarcia lokalu
-- Zarządzanie dostępem – możliwość przypisania innych użytkowników jako współadminów lokalu
-
-*W aplikacji istnieje także rola administratora systemowego z uprawnieniami do tworzenia i usuwania restauracji oraz zarządzania dostępami.*
-
+> **Note:** The user interface is currently available in **Polish** only.
 
 ---
 
-## 📸 Zrzuty ekranu
+## ✨ Main Features
 
-### Strona główna użytkownika
-![Strona główna](screenshots/Home.png)  
-Użytkownik widzi listę dostępnych restauracji z miniaturą, nazwą i krótkim opisem.
+### User
+- Registration and login using JWT
+- Browse available restaurants and view detailed information
+- Book tables for a specific date and time
+- Personal dashboard with reservation history
+- Data validation (frontend + backend)
+- Request authorization and middleware-protected routes
 
----
+### Restaurant Administrator
+- Manage reservations for their own restaurant (view, edit, cancel)
+- Add and edit tables with assigned number of seats
+- Create and update menus with categorized items
+- Set opening hours for the restaurant
+- Manage access – assign other users as restaurant co-admins
 
-### Szczegóły restauracji
-![Szczegóły restauracji](screenshots/RestaurantPage.png)  
-Kliknięcie w restaurację prowadzi do strony z pełnym opisem, adresem i przyciskiem do rezerwacji.
-
----
-
-### Widok menu i godzin otwarcia
-![Godziny i menu](screenshots/RestaurantPageInfo.png)  
-Informacje o godzinach otwarcia i aktualne menu podzielone na kategorie.
-
----
-
-### Formularz rezerwacji
-![Rezerwacja](screenshots/Reservation.png)  
-Użytkownik wybiera datę, godzinę, czas trwania rezerwacji oraz dostępny stolik.
+*A separate system administrator role exists with permissions to manage restaurants globally.*
 
 ---
 
-## Widoki administracyjne
+## 📸 Screenshots
 
-Aplikacja zawiera dwa poziomy uprawnień administracyjnych:  
-• **Admin restauracji** – zarządza pojedynczym lokalem  
-• **Admin systemu** – zarządza wszystkimi restauracjami
-
----
-
-### Admin systemu – panel zarządzania restauracjami
-![Admin systemowy – lista restauracji](screenshots/HomeAdmin.png)  
-Zarządzanie wszystkimi restauracjami w systemie: dodawanie, edycja, zarządzanie dostępem.
+### User homepage
+![Homepage](screenshots/Home.png)  
+Users can browse the list of available restaurants with thumbnails, names, and brief descriptions.
 
 ---
 
-###  Admin restauracji – panel restauracji
-![Admin restauracji – szczegóły](screenshots/RestaurantPageAdmin.png)  
-Możliwość edycji danych lokalu, zarządzania stolikami, rezerwacjami i menu.
+### Restaurant details
+![Restaurant details](screenshots/RestaurantPage.png)  
+Clicking a restaurant opens a full details page with description, address, and booking options.
 
 ---
 
-###  Admin restauracji – edycja godzin i menu
-![Godziny i menu – admin](screenshots/RestaurantPageInfoAdmin.png)
+### Menu and opening hours
+![Menu & hours](screenshots/RestaurantPageInfo.png)  
+Displays the restaurant's current menu (categorized) and opening hours.
 
 ---
 
-###  Admin restauracji – widok rezerwacji
-![Admin restauracji – rezerwacje](screenshots/RestaurantReservations.png)
+### Booking form
+![Booking](screenshots/Reservation.png)  
+The user selects a date, time, reservation duration, and an available table.
 
 ---
 
-###  Admin restauracji – edycja stolików
-![Stoliki](screenshots/RestaurantTables.png)
+## Admin Views
+
+The app supports two levels of administrative access:  
+• **Restaurant Admin** – manages a specific venue  
+• **System Admin** – manages all restaurants in the system
 
 ---
 
-## 🛠️ Technologie
+### System Admin – Restaurant management panel
+![System admin view](screenshots/HomeAdmin.png)  
+Manage all restaurants: create, edit, delete, and assign access.
+
+---
+
+### Restaurant Admin – Restaurant panel
+![Restaurant admin panel](screenshots/RestaurantPageAdmin.png)  
+Manage local details, reservations, menu, and seating layout.
+
+---
+
+### Restaurant Admin – Menu & hours editor
+![Edit menu & hours](screenshots/RestaurantPageInfoAdmin.png)
+
+---
+
+### Restaurant Admin – Reservations view
+![Reservation list](screenshots/RestaurantReservations.png)
+
+---
+
+### Restaurant Admin – Table editor
+![Table editor](screenshots/RestaurantTables.png)
+
+---
+
+## 🛠️ Technologies
 
 **Frontend:**
 - React
@@ -100,65 +101,65 @@ Możliwość edycji danych lokalu, zarządzania stolikami, rezerwacjami i menu.
 
 **Backend:**
 - Node.js + Express
-- JWT (autoryzacja)
+- JWT (authentication)
 - MySQL
 - REST API
 
-**Inne:**
-- bcrypt (hashowanie haseł)
-- środowisko lokalne (MySQL)
-- Postman (testowanie API)
+**Other:**
+- bcrypt (password hashing)
+- Local MySQL environment
+- Postman (API testing)
 
 ---
 
-## 📁 Struktura projektu
+## 📁 Project Structure
 
-Projekt jest podzielony na trzy główne części:
+The project consists of three main parts:
 
-- `frontend/` - aplikacja React (strony, komponenty, style, kontekst użytkownika)
-- `backend/` - serwer Node.js + Express (modele, kontrolery, middleware, routes)
-- `database/` - pliki SQL do utworzenia i zapełnienia bazy danych, model ERD
+- `frontend/` – React app (pages, components, styles, user context)
+- `backend/` – Node.js + Express server (models, controllers, middleware, routes)
+- `database/` – SQL files to create and populate the database, plus ERD
 
-Dodatkowo:
-- `screenshots/` - zrzuty ekranu do dokumentacji
-- `README.md` - plik z opisem projektu
+Additional:
+- `screenshots/` – screenshots for documentation
+- `README.md` – project description
 
 ---
 
-## ⚙️ Konfiguracja i uruchomienie projektu lokalnie
+## ⚙️ Running Locally
 
-###  Wymagania wstępne
+### Prerequisites
 
 - Node.js (v16+)
 - MySQL
 
 ---
 
-###  Krok 1: Utworzenie bazy danych
+### Step 1: Database Setup
 
-1. Uruchom lokalny serwer MySQL
-2. Zaloguj się do MySQL.
-3. W katalogu `database/` znajdują się 2 pliki SQL:
-   - `db_create.sql` – tworzy strukturę bazy danych
-   - `db_values.sql` – wstawia dane przykładowe
-4. Wykonaj te pliki w kolejności:
+1. Launch your MySQL server
+2. Log in to your MySQL console
+3. In the `database/` folder you'll find two SQL files:
+   - `db_create.sql` – creates the database schema
+   - `db_values.sql` – inserts sample data
+4. Run both files in order:
 
 ```sql
--- Najpierw struktura
-SOURCE /ścieżka/do/database/db_create.sql;
+-- First the structure
+SOURCE /path/to/database/db_create.sql;
 
--- Następnie dane przykładowe
-SOURCE /ścieżka/do/database/db_values.sql;
+-- Then the sample data
+SOURCE /path/to/database/db_values.sql;
 ```
 
- Uwaga: upewnij się, że masz utworzoną bazę danych `zjedz_tam` lub zmodyfikuj nazwę bazy w pliku `.env`.
+Make sure the database name is `zjedz_tam`, or update it accordingly in the `.env` file.
 
 ---
 
-### Krok 2: Konfiguracja środowiska
+### Step 2: Environment Configuration
 
->  **Uwaga:** Plik `.env` został dołączony do repozytorium dla wygody testowania aplikacji lokalnie. Zawiera domyślne dane i może być bezpiecznie używany w środowisku lokalnym.
-
+>  **Note:** The `.env` file is included for convenience. It contains default settings for local development and is safe to use locally.
+> 
 ####  backend/.env:
 
 ```
@@ -173,17 +174,15 @@ JWT_SECRET=sekretnysekret
 
 ---
 
-###  Krok 3: Instalacja zależności
+###  Step 3: Installing Dependencies
 
 **Backend:**
-Przejdź do folderu backend i zainstaluj zależności
 ```bash
 cd backend
 npm i
 ```
 
 **Frontend:**
-Przejdź do folderu frontend i zainstaluj zależności
 ```bash
 cd ../frontend
 npm i
@@ -191,41 +190,41 @@ npm i
 
 ---
 
-###  Krok 4: Uruchomienie aplikacji
+###  Step 4: Running the Application
 
-Uruchom **backend:**
+Start **backend:**
 ```bash
 cd backend
 node server
 ```
 
-Uruchom **frontend:**
+Start **frontend:**
 ```bash
 cd ../frontend
 npm start
 ```
 
-Aplikacja będzie dostępna pod adresem: [http://localhost:3000](http://localhost:3000)
+The app will be available at: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-### Dane testowe do logowania
+### Test Login Credentials
 
-Do przetestowania aplikacji możesz użyć gotowych kont:
+You can log in with the following test accounts:
 
-1. **Administrator systemu**
-   - Login: `admin@ad.a`
-   - Hasło: `admin123`
+1. **System Administrator**
+   - Email: `admin@ad.a`
+   - Password: `admin123`
 
-2. **Użytkownik (admin restauracji „La Bella Italia”)**
-   - Login: `user@us.u`
-   - Hasło: `user123`
+2. **User (admin of "La Bella Italia" restaurant)**
+   - Email: `user@us.u`
+   - Password: `user123`
 
 ---
 
-## 📊 Model bazy danych
+## 📊 Database Model
 
-Schemat ERD znajduje się w pliku:
+ERD schema file:
 
 ```
 /database/db-model.png
@@ -233,19 +232,19 @@ Schemat ERD znajduje się w pliku:
 
 ---
 
-## 📚 Plany rozwoju
+## 📚 Future Improvements
 
-- System recenzji i oceniania restauracji
-- System powiadomień o rezerwacjach
-- Filtrowanie i wyszukiwanie po lokalizacji, nazwie, typie kuchni, ocenie
-- Integracja z mapą
-- Rozszerzony system ról (np. kelner/manager z ograniczonym dostępem)
-- Resetowanie hasła i zarządzanie kontem
-- Dodanie testów jednostkowych i integracyjnych
+- Review & rating system for restaurants
+- Reservation notification system
+- Filtering and searching by location, name, cuisine type, rating
+- Map integration
+- Extended role system (e.g., waiter/manager access)
+- Password reset and account management
+- Unit and integration tests
 
 ---
 
-## 📫 Kontakt
+## 📫 Contact
 
 - GitHub: [@s29418](https://github.com/s29418)
 - Email: _kulasmikolaj00@gmail.com_
